@@ -3,6 +3,8 @@ package sda.ispeak.prework.services;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import sda.ispeak.prework.models.dtos.UserDto;
+import sda.ispeak.prework.models.emails.EmailSender;
+import sda.ispeak.prework.models.emails.MyEmail;
 import sda.ispeak.prework.models.exceptions.UserExistException;
 import sda.ispeak.prework.models.mappers.UserMapper;
 import sda.ispeak.prework.models.users.User;
@@ -27,6 +29,7 @@ public class UserService {
         User user = UserMapper.map(userDto);
         checkIfUserAlreadyExist(user);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        EmailSender.sendEmail(new MyEmail("Witaj użytkowniku " + userDto.getUserName(),"Udało Ci się założyć konto w aplikacji",userDto.getEmail()));
         return userRepository.save(user);
     }
 
