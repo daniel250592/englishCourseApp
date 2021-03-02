@@ -3,13 +3,14 @@ package sda.ispeak.prework.services;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import sda.ispeak.prework.models.dtos.UserDto;
+import sda.ispeak.prework.models.emails.EmailGenerator;
 import sda.ispeak.prework.models.emails.EmailSender;
-import sda.ispeak.prework.models.emails.MyEmail;
 import sda.ispeak.prework.models.exceptions.UserExistException;
 import sda.ispeak.prework.models.mappers.UserMapper;
 import sda.ispeak.prework.models.users.User;
 import sda.ispeak.prework.repositories.UserRepository;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -29,8 +30,15 @@ public class UserService {
         User user = UserMapper.map(userDto);
         checkIfUserAlreadyExist(user);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        EmailSender.sendEmail(new MyEmail("Witaj użytkowniku " + userDto.getUserName(),"Udało Ci się założyć konto w aplikacji",userDto.getEmail()));
-        return userRepository.save(user);
+        user = userRepository.save(user);
+        EmailSender.sendEmail(EmailGenerator.generateEmail(user));
+        return user;
+    }
+
+    public User activateUserWithGivenId(long id){
+        User user = findUserById(id);
+        user.setActive(true);
+        return user;
     }
 
     private void checkIfUserAlreadyExist(User user) {
@@ -38,5 +46,10 @@ public class UserService {
         if (byEmailAndUserName.isPresent()) {
             throw new UserExistException("użytkownik taki już istnieje");
         }
+    }
+
+    public User findUserById(long id){
+        return userRepository.findById(id).orElseThrow(NoSuchElementException::new);
+        //TODO tutaj trzeba zrobic własny wyjątek
     }
 }

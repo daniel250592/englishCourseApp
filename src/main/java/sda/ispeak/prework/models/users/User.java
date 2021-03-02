@@ -19,6 +19,7 @@ public class User {
     private String userName;
     private String password;
     private String role = "USER";
+    private boolean active = false;
 
     public User() {
     }
@@ -68,5 +69,13 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

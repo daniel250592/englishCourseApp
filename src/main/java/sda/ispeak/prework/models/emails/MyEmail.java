@@ -1,5 +1,8 @@
 package sda.ispeak.prework.models.emails;
 
+import lombok.Builder;
+
+@Builder
 public class MyEmail {
 
     private String subject;

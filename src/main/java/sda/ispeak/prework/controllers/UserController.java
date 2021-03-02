@@ -26,6 +26,11 @@ public class UserController {
         return userService.save(userDto);
     }
 
+    @GetMapping("/activate-your-account{id}")
+    public User activateUserAccount(@PathVariable long id){
+       return userService.activateUserWithGivenId(id);
+    }
+
     @ExceptionHandler(value = RuntimeException.class)
     public ResponseEntity<Object> handleNoSuchElementException(UserExistException userExistException) {
         return new ResponseEntity<>(userExistException.getMessage(), HttpStatus.BAD_REQUEST);
