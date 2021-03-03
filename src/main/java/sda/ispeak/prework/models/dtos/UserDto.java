@@ -36,7 +36,7 @@ public class UserDto {
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.userName = userName.trim();
     }
 
     public String getPassword() {

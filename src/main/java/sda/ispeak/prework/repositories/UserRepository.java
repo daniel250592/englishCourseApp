@@ -5,7 +5,9 @@ import sda.ispeak.prework.models.users.User;
 
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<User,Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByEmailAndUserName(String email, String userName);
+
+    User findUserByUserName(String username);
 }

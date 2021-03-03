@@ -11,7 +11,7 @@ public class EmailSender {
 
     private static final String HOST_NAME = "poczta.o2.pl";
     private static final int SMTP_PORT = 465;
-    private static final String USER_NAME = "ispeakapp@o2.pl";
+    private static final String USER_NAME = "ispeakapp@o2.pl//zla wartosc";
     private static final String PASSWORD = "Ispeak2000!";
     private static final boolean SSL_ON_CONNECT = true;
 

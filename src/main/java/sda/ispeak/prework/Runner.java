@@ -3,6 +3,7 @@ package sda.ispeak.prework;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import sda.ispeak.prework.models.dtos.UserDto;
 import sda.ispeak.prework.models.questions.Answer;
 import sda.ispeak.prework.models.questions.Question;
 import sda.ispeak.prework.models.questions.QuestionSubject;
@@ -60,7 +61,17 @@ public class Runner implements CommandLineRunner {
         user.setUserName("example");
         user.setPassword("example");
 
-        userRepository.save(user);
+       UserDto userDto = new UserDto();
+
+       userDto.setUserName(user.getUserName());
+       userDto.setEmail(user.getEmail());
+       userDto.setPassword(user.getPassword());
+       userDto.setConfirmedPassword(user.getPassword());
+
+       userService.save(userDto);
+
+
+
 
 
 
