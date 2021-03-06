@@ -62,7 +62,8 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <scope>test</scope>
+            <!-- activate when mysql db is created -->
+<!--            <scope>test</scope>-->
         </dependency>
     </dependencies>
 
