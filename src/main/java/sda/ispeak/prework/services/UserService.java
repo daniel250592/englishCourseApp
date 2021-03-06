@@ -45,7 +45,7 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    private void checkIfUserAlreadyExist(User user) {
+     void checkIfUserAlreadyExist(User user) {
         Optional<User> byEmailAndUserName = userRepository.findByEmailAndUserName(user.getEmail(), user.getUserName());
         if (byEmailAndUserName.isPresent()) {
             throw new UserExistException("użytkownik taki już istnieje");
@@ -69,5 +69,11 @@ public class UserService implements UserDetailsService {
         User user = userRepository.findUserByUserName(s);
         System.out.println(user);
         return new UserDetailsAdapter(user);
+    }
+
+    public User deleteUserById(long id) {
+        User user = findUserById(id);
+        userRepository.delete(user);
+        return user;
     }
 }
