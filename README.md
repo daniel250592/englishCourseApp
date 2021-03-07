@@ -123,4 +123,5 @@ i dodatkowo umożliwiać filtrowanie zwracanych pytań po temacie.
 Aplikacja wyświetlająca wydarzenia pobrane z API
 Należy zbudować drugą aplikację (z wykorzystaniem Spring + Angular), która skonsumuje API i wygeneruje widok lekcji oraz quizów.
 
-
+## Jak zainicjować program
+Przed pierwszym uruchomieniem program musisz w zewnętrzym kliencie bazy danych uruchomić skrypt: resources/db/init.sql.
