@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import sda.ispeak.prework.models.dtos.UserDto;
 import sda.ispeak.prework.models.exceptions.UserExistException;
 import sda.ispeak.prework.models.users.User;
@@ -15,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @SpringBootTest
+@Transactional
 class UserServiceTest {
 
     @Autowired
@@ -40,10 +42,7 @@ class UserServiceTest {
     void shouldIdNotNull() {
         User save = userService.save(userDto);
 
-        assertThat(save.getId()).isNotEqualTo(0);
-        System.out.println(save.getId());
-        userService.deleteUserById(save.getId());
-
+        assertThat(save.getId()).isNotZero();
     }
 
     @Test
@@ -52,23 +51,15 @@ class UserServiceTest {
         User user = userService.findUserById(save.getId());
 
         assertTrue(passwordEncoder.matches(userDto.getPassword(), user.getPassword()));
-
-        System.out.println(save.getId());
-        userService.deleteUserById(save.getId());
-
     }
 
     @Test
     void shouldThrowUserExistException() {
-        assertThatThrownBy(() -> {
-            User save = userService.save(userDto);
-            userService.checkIfUserAlreadyExist(save);
-        }).isExactlyInstanceOf(UserExistException.class)
+        userService.save(userDto);
+
+        assertThatThrownBy(() -> userService.save(userDto))
+                .isExactlyInstanceOf(UserExistException.class)
                 .hasMessage("użytkownik taki już istnieje")
                 .hasNoCause();
-        userService.deleteUserById(5);
-        //TODO nie wiem jak skasować dane po testach
     }
-
-
 }
