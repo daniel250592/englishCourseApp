@@ -1,5 +1,6 @@
 package sda.ispeak.prework;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Component
+@Slf4j
 public class Runner implements CommandLineRunner {
 
 
@@ -35,45 +37,45 @@ public class Runner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        try {
+            User user = new User();
 
-        Answer answerA = new Answer("Good morning", true);
-        Answer answerB = new Answer("Guten Dag", false);
+            user.setEmail("test@example.com");
+            user.setUserName("example");
+            user.setPassword("example");
 
-        Answer save = answerRepository.save(answerA);
-        Answer answer = answerRepository.save(answerB);
+            UserDto userDto = new UserDto();
 
+            userDto.setUserName(user.getUserName());
+            userDto.setEmail(user.getEmail());
+            userDto.setPassword(user.getPassword());
+            userDto.setConfirmedPassword(user.getPassword());
 
-        Set<Answer> answers = new HashSet<>();
-        answers.add(save);
-        answers.add(answer);
-        Question question = new Question("PresentSimple", "Jak jest dzien dobry po angielsku?");
+            userService.save(userDto);
 
+            Answer answerA = new Answer("Good morning", true);
+            Answer answerB = new Answer("Guten Dag", false);
 
-        questionRepository.save(question);
-
-        Set<Answer> answers1 = question.getAnswers();
-
-        QuestionSubject futureSimple = QuestionSubject.valueOf("FutureSimple");
-
-        User user = new User();
-
-        user.setEmail("test@example.com");
-        user.setUserName("example");
-        user.setPassword("example");
-
-       UserDto userDto = new UserDto();
-
-       userDto.setUserName(user.getUserName());
-       userDto.setEmail(user.getEmail());
-       userDto.setPassword(user.getPassword());
-       userDto.setConfirmedPassword(user.getPassword());
-
-       userService.save(userDto);
+            Answer save = answerRepository.save(answerA);
+            Answer answer = answerRepository.save(answerB);
 
 
+            Set<Answer> answers = new HashSet<>();
+            answers.add(save);
+            answers.add(answer);
+            Question question = new Question("PresentSimple", "Jak jest dzien dobry po angielsku?");
 
 
+            questionRepository.save(question);
 
+            Set<Answer> answers1 = question.getAnswers();
+
+            QuestionSubject futureSimple = QuestionSubject.valueOf("FutureSimple");
+
+
+        } catch (Exception e) {
+            log.error("Nie inicjuje bazy - problem ", e);
+        }
 
     }
 }
