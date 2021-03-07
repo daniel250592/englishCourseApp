@@ -36,13 +36,17 @@ public class UserService implements UserDetailsService {
         checkIfUserAlreadyExist(user);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user = userRepository.save(user);
+        // TODO: zmienic na DI
         EmailSender.sendEmail(EmailGenerator.generateEmail(user));
         return user;
     }
 
+    // TODO: nie uzywac encji, moze boolean
     public User activateUserWithGivenId(long id) {
         User user = findUserById(id);
         user.setActive(true);
+
+        // TODO: a gdzie save?
         return user;
     }
 
@@ -54,7 +58,7 @@ public class UserService implements UserDetailsService {
     }
 
     //TODO ten wyjątek nie jest rzucany nie mam pojecia dlaczego.
-    public User findUserById(long id) {
+    private User findUserById(long id) {
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent()) {
             return user.get();
