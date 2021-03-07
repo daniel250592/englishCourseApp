@@ -1,5 +1,7 @@
 package sda.ispeak.prework.models.users;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.ToString;
 
 import javax.persistence.Entity;
@@ -7,7 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
+@Builder
 @ToString
+@AllArgsConstructor
 public class User {
 
     @Id
