@@ -4,7 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import sda.ispeak.prework.services.SubjectService;
+import sda.ispeak.prework.models.topic.Topic;
+import sda.ispeak.prework.services.TopicService;
 
 import java.util.List;
 
@@ -13,10 +14,11 @@ import java.util.List;
 @RequestMapping("/subjects")
 public class SubjectController {
 
-    private final SubjectService service;
+    private final TopicService service;
 
-    @GetMapping()
-    public List<String> getAllSubjects() {
-        return service.getAllSubjects();
+    @GetMapping("/get")
+    public List<Topic> getAllTopics() {
+
+        return service.getAllTopics();
     }
 }

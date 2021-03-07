@@ -7,10 +7,13 @@ import sda.ispeak.prework.models.dtos.UserDto;
 import sda.ispeak.prework.models.questions.Answer;
 import sda.ispeak.prework.models.questions.Question;
 import sda.ispeak.prework.models.questions.QuestionSubject;
+import sda.ispeak.prework.models.topic.Topic;
 import sda.ispeak.prework.models.users.User;
 import sda.ispeak.prework.repositories.AnswerRepository;
 import sda.ispeak.prework.repositories.QuestionRepository;
+import sda.ispeak.prework.repositories.TopicRepository;
 import sda.ispeak.prework.repositories.UserRepository;
+import sda.ispeak.prework.services.TopicService;
 import sda.ispeak.prework.services.UserService;
 
 import java.util.HashSet;
@@ -32,8 +35,14 @@ public class Runner implements CommandLineRunner {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    TopicRepository topicRepository;
+
+    @Autowired
+    TopicService topicService;
+
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
 
 
         Answer answerA = new Answer("Good morning", true);
@@ -69,9 +78,6 @@ public class Runner implements CommandLineRunner {
        userDto.setConfirmedPassword(user.getPassword());
 
        userService.save(userDto);
-
-
-
 
 
 
