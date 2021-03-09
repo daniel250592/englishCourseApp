@@ -8,9 +8,9 @@ import java.util.Set;
 
 @Entity
 public class Topic {
+
     @Id
-    @GeneratedValue
-    private Long id;
+    private long id;
 
     private String name;
     private String content;
@@ -21,12 +21,36 @@ public class Topic {
     @OneToMany
     private Set<User> users;
 
-    public Long getId() {
+    public Topic() {
+    }
+
+    public Topic(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Topic(long id, String name, String content, Quiz quiz, Set<User> users) {
+        this.id = id;
+        this.name = name;
+        this.content = content;
+        this.quiz = quiz;
+        this.users = users;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
+    }
+
+    public Quiz getQuiz() {
+        return quiz;
+    }
+
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
     }
 
     public String getName() {

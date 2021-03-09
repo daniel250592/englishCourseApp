@@ -2,16 +2,23 @@ package sda.ispeak.prework;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import sda.ispeak.prework.models.dtos.TopicDto;
 import sda.ispeak.prework.models.dtos.UserDto;
+import sda.ispeak.prework.models.mappers.TopicMapper;
 import sda.ispeak.prework.models.questions.Answer;
 import sda.ispeak.prework.models.questions.Question;
 import sda.ispeak.prework.models.questions.QuestionSubject;
+import sda.ispeak.prework.models.topic.Quiz;
+import sda.ispeak.prework.models.topic.Topic;
 import sda.ispeak.prework.models.users.User;
 import sda.ispeak.prework.repositories.AnswerRepository;
 import sda.ispeak.prework.repositories.QuestionRepository;
+import sda.ispeak.prework.repositories.TopicRepository;
 import sda.ispeak.prework.repositories.UserRepository;
+import sda.ispeak.prework.services.TopicService;
 import sda.ispeak.prework.services.UserService;
 
 import java.util.HashSet;
@@ -33,6 +40,13 @@ public class Runner implements CommandLineRunner {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    TopicService topicService;
+
+    @Autowired
+    TopicRepository topicRepository;
+
 
     @Override
     public void run(String... args) throws Exception {
@@ -72,10 +86,16 @@ public class Runner implements CommandLineRunner {
 
             QuestionSubject futureSimple = QuestionSubject.valueOf("FutureSimple");
 
+            Topic topic1 = new Topic(1,"Present Simple");
+            Topic topic2 = new Topic(2,"Present Continous");
+topicRepository.save(topic1);
+topicRepository.save(topic2);
+
 
         } catch (Exception e) {
             log.error("Nie inicjuje bazy - problem ", e);
         }
+
 
     }
 }
