@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
-import sda.ispeak.prework.models.dtos.UserDto;
+import sda.ispeak.prework.models.dtos.user.UserDto;
+import sda.ispeak.prework.models.dtos.user.UserDtoToReturn;
 import sda.ispeak.prework.models.exceptions.UserExistException;
 import sda.ispeak.prework.models.users.User;
 
@@ -39,7 +40,7 @@ class UserServiceITTest {
 
     @Test
     void shouldIdNotNull() {
-        User save = userService.save(userDto);
+        UserDtoToReturn save = userService.save(userDto);
 
         assertThat(save.getId()).isNotZero();
     }
@@ -50,7 +51,7 @@ class UserServiceITTest {
 
         assertThatThrownBy(() -> userService.save(userDto))
                 .isExactlyInstanceOf(UserExistException.class)
-                .hasMessage("użytkownik taki już istnieje")
+                .hasMessage("Użytkownik taki już istnieje")
                 .hasNoCause();
     }
 }

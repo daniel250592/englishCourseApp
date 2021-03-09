@@ -5,7 +5,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import sda.ispeak.prework.models.dtos.UserDto;
+import sda.ispeak.prework.models.dtos.user.UserDto;
+import sda.ispeak.prework.models.dtos.user.UserDtoToReturn;
 import sda.ispeak.prework.models.emails.EmailGenerator;
 import sda.ispeak.prework.models.emails.EmailSender;
 import sda.ispeak.prework.models.exceptions.NoSuchUserException;
@@ -25,35 +26,37 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-    public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository) {
+    private final EmailSender emailSender;
+
+    public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository, EmailSender emailSender) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
+        this.emailSender = emailSender;
     }
 
 
-    public User save(UserDto userDto) {
+    public UserDtoToReturn save(UserDto userDto) {
         User user = UserMapper.map(userDto);
         checkIfUserAlreadyExist(user);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user = userRepository.save(user);
-        // TODO: zmienic na DI
-        EmailSender.sendEmail(EmailGenerator.generateEmail(user));
-        return user;
+        emailSender.sendEmail(EmailGenerator.generateEmail(user));
+        return UserMapper.map(user);
+
     }
 
-    // TODO: nie uzywac encji, moze boolean
-    public User activateUserWithGivenId(long id) {
+    public UserDtoToReturn activateUserWithGivenId(long id) {
         User user = findUserById(id);
         user.setActive(true);
+        User save = userRepository.save(user);
+        return UserMapper.map(save);
 
-        // TODO: a gdzie save?
-        return user;
     }
 
-     private void checkIfUserAlreadyExist(User user) {
+    private void checkIfUserAlreadyExist(User user) {
         Optional<User> byEmailAndUserName = userRepository.findByEmailAndUserName(user.getEmail(), user.getUserName());
         if (byEmailAndUserName.isPresent()) {
-            throw new UserExistException("użytkownik taki już istnieje");
+            throw new UserExistException("Użytkownik taki już istnieje");
         }
     }
 
@@ -64,6 +67,7 @@ public class UserService implements UserDetailsService {
             return user.get();
         } else {
             throw new NoSuchUserException("Użytkownik o podanym ID nie istnieje");
+            //TODO nie wiem dlaczego mi tutaj nie wchodzi pokrycie testami
         }
     }
 

@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import sda.ispeak.prework.models.dtos.UserDto;
+import sda.ispeak.prework.models.dtos.user.UserDto;
 import sda.ispeak.prework.models.questions.Answer;
 import sda.ispeak.prework.models.questions.Question;
 import sda.ispeak.prework.models.questions.QuestionSubject;
@@ -35,7 +35,7 @@ public class Runner implements CommandLineRunner {
     UserRepository userRepository;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
 
         try {
             User user = new User();

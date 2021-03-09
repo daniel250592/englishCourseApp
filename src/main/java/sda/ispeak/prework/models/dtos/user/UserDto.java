@@ -1,4 +1,4 @@
-package sda.ispeak.prework.models.dtos;
+package sda.ispeak.prework.models.dtos.user;
 
 import sda.ispeak.prework.models.validations.theSamePasswordsVlidator.TheSamePasswordsValidator;
 
