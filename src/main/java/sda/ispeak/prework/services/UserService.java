@@ -60,7 +60,6 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    //TODO ten wyjątek nie jest rzucany nie mam pojecia dlaczego.
     private User findUserById(long id) {
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent()) {

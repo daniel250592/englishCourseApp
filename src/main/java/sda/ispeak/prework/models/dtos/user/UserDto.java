@@ -1,5 +1,8 @@
 package sda.ispeak.prework.models.dtos.user;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import sda.ispeak.prework.models.validations.theSamePasswordsVlidator.TheSamePasswordsValidator;
 
 import javax.validation.constraints.Email;
@@ -8,6 +11,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @TheSamePasswordsValidator
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDto {
 
     @Email(message = "zły format e-maila")

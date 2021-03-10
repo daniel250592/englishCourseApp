@@ -117,7 +117,6 @@ class UserServiceTest {
     }
 
     @Test
-    @Disabled
     void shouldReturnActiveAccount(){
         User user = new User();
         user.setActive(true);

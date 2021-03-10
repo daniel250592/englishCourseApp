@@ -15,6 +15,12 @@ public class TheSamePasswordsValidatorImpl implements ConstraintValidator<TheSam
 
     @Override
     public boolean isValid(UserDto userDto, ConstraintValidatorContext constraintValidatorContext) {
+        if (userDto.getUserName().isEmpty() || userDto.getUserName().isBlank() ||
+        userDto.getPassword().isEmpty() || userDto.getPassword().isBlank() ||
+        userDto.getConfirmedPassword().isEmpty() || userDto.getConfirmedPassword().isBlank() ||
+        userDto.getEmail().isEmpty() || userDto.getEmail().isBlank()){
+            return false;
+        }
         return userDto.getPassword().equals(userDto.getConfirmedPassword());
     }
 
