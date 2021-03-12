@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import sda.ispeak.prework.models.dtos.QuestionDto;
 import sda.ispeak.prework.models.dtos.TopicDto;
 import sda.ispeak.prework.models.questions.Question;
+import sda.ispeak.prework.models.topic.Topic;
 import sda.ispeak.prework.services.TopicService;
 
 import java.util.List;

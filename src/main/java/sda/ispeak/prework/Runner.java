@@ -49,7 +49,7 @@ public class Runner implements CommandLineRunner {
 
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
 
         try {
             User user = new User();
@@ -88,8 +88,12 @@ public class Runner implements CommandLineRunner {
 
             Topic topic1 = new Topic(1,"Present Simple");
             Topic topic2 = new Topic(2,"Present Continous");
+            Topic topic5 = new Topic(5,"Present Perfect Simple");
+            Topic topic3 = new Topic(3,"Present Perfect Continous");
 topicRepository.save(topic1);
 topicRepository.save(topic2);
+topicRepository.save(topic5);
+topicRepository.save(topic3);
 
 
         } catch (Exception e) {

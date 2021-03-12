@@ -12,7 +12,7 @@ public class TopicMapper {
         return new Topic((topicDto.getId()), topicDto.getName());
     }
 
-    public static TopicDto topicMapper(Topic topic) {
+    public static TopicDto map(Topic topic) {
 
         return TopicDto.builder()
                 .id(topic.getId())
