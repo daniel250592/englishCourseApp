@@ -18,12 +18,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/add-new-user")
+    @PostMapping("/new-user")
     public UserProfile addNewUser(@RequestBody @Valid UserDto userDto) {
         return userService.save(userDto);
     }
 
-    @GetMapping("/activate-your-account{id}")
+    @GetMapping("/activate-account{id}")
     public UserProfile activateUserAccount(@PathVariable long id) {
         return userService.activateUserWithGivenId(id);
     }

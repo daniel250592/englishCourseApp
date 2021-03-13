@@ -11,25 +11,26 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@TheSamePasswordsValidator
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@TheSamePasswordsValidator
 public class UserDto {
 
-    @Email(message = "zły format e-maila")
+    @Email(message = "Zły format e-maila")
     private String email;
 
-    @NotNull(message = "nazwa użytkownika nie może być pusta")
+    @NotNull(message = "Nazwa użytkownika nie może być pusta")
     @NotBlank(message = "nazwa użytkownika nie może być pusta")
     @Size(max = 50, message = "nazwa użytkownika nie może być dłuższa niż 50 znaków")
     private String userName;
 
-    @NotNull(message = "hasło nie może być puste")
-    @NotBlank(message = "hasło nie może być puste")
-    @Size(min = 8, max = 30, message = "hasło powinno zawietać się w przedziale od 8 do 15 znaków")
+    @NotNull(message = "Hasło nie może być puste")
+    @NotBlank(message = "Hasło nie może być puste")
+    @Size(min = 8, max = 30, message = "Hasło powinno zawietać się w przedziale od 8 do 15 znaków")
     private String password;
+
     private String confirmedPassword;
 
     public String getEmail() {

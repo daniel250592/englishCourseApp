@@ -11,6 +11,8 @@ public class UserMapper {
                 .email(userDto.getEmail())
                 .userName(userDto.getUserName())
                 .password(userDto.getPassword())
+                .role("USER")
+                .active(false)
                 .build();
     }
 
@@ -22,4 +24,5 @@ public class UserMapper {
                 .isActive(user.isActive())
                 .build();
     }
+
 }

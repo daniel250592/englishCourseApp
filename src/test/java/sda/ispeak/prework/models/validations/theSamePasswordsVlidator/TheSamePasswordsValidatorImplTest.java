@@ -30,7 +30,6 @@ class TheSamePasswordsValidatorImplTest {
         boolean valid = theSamePasswordsValidator.isValid(userDto, constraintValidatorContext);
 
         assertThat(valid).isTrue();
-
     }
 
     @Test
@@ -45,7 +44,18 @@ class TheSamePasswordsValidatorImplTest {
         boolean valid = theSamePasswordsValidator.isValid(userDto, constraintValidatorContext);
 
         assertThat(valid).isFalse();
+    }
 
+    @Test
+    void shouldAssertTrueWhenUserNameAndEmailAreNull() {
+        UserDto userDto = UserDto.builder()
+                .password("test12345")
+                .confirmedPassword("test12345")
+                .build();
+
+        boolean valid = theSamePasswordsValidator.isValid(userDto, constraintValidatorContext);
+
+        assertThat(valid).isTrue();
     }
 
 }

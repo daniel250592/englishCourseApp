@@ -42,14 +42,12 @@ public class UserService implements UserDetailsService {
         user = userRepository.save(user);
         emailSender.sendEmail(EmailGenerator.generateEmail(user));
         return UserMapper.map(user);
-
     }
 
     public UserProfile activateUserWithGivenId(long id) {
         User user = findUserById(id);
         user.setActive(true);
         return UserMapper.map(updateUser(user));
-
     }
 
     private User updateUser(User user) {
@@ -58,7 +56,7 @@ public class UserService implements UserDetailsService {
 
     private void checkIfUserAlreadyExist(User user) {
 
-        Optional<User> byEmailAndUserName = userRepository.findByEmailAndUserName(user.getEmail(), user.getUserName());
+        Optional<User> byEmailAndUserName = userRepository.findByEmailOrUserName(user.getEmail(), user.getUserName());
 
         if (byEmailAndUserName.isPresent()) {
             throw new UserExistException("Użytkownik taki już istnieje");
@@ -80,7 +78,6 @@ public class UserService implements UserDetailsService {
 //        }
     }
 
-    //TODO nie da sie zalogować poprzez sztywnego uzytkownika
     @Override
     public UserDetails loadUserByUsername(String s) {
         User user = userRepository.findUserByUserName(s);

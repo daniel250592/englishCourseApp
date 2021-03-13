@@ -5,7 +5,6 @@ import sda.ispeak.prework.models.questions.Question;
 import sda.ispeak.prework.models.validations.theSamePasswordsVlidator.TheSamePasswordsValidator;
 
 @ToString
-@TheSamePasswordsValidator
 public class FourAnswersForm {
 
     private String firstAnswerContent;
