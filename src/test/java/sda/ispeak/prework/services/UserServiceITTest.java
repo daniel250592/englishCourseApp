@@ -7,9 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import sda.ispeak.prework.models.dtos.user.UserDto;
-import sda.ispeak.prework.models.dtos.user.UserDtoToReturn;
+import sda.ispeak.prework.models.dtos.user.UserProfile;
 import sda.ispeak.prework.models.exceptions.UserExistException;
-import sda.ispeak.prework.models.users.User;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -40,7 +39,7 @@ class UserServiceITTest {
 
     @Test
     void shouldIdNotNull() {
-        UserDtoToReturn save = userService.save(userDto);
+        UserProfile save = userService.save(userDto);
 
         assertThat(save.getId()).isNotZero();
     }

@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sda.ispeak.prework.models.dtos.user.UserDto;
-import sda.ispeak.prework.models.dtos.user.UserDtoToReturn;
+import sda.ispeak.prework.models.dtos.user.UserProfile;
 import sda.ispeak.prework.models.exceptions.NoSuchUserException;
 import sda.ispeak.prework.models.exceptions.UserExistException;
 import sda.ispeak.prework.services.UserService;
@@ -23,12 +23,12 @@ public class UserController {
     }
 
     @PostMapping("/add-new-user")
-    public UserDtoToReturn addNewUser(@RequestBody @Valid UserDto userDto) {
+    public UserProfile addNewUser(@RequestBody @Valid UserDto userDto) {
         return userService.save(userDto);
     }
 
     @GetMapping("/activate-your-account{id}")
-    public UserDtoToReturn activateUserAccount(@PathVariable long id) {
+    public UserProfile activateUserAccount(@PathVariable long id) {
         return userService.activateUserWithGivenId(id);
     }
 

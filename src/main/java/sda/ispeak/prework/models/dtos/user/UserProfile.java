@@ -3,11 +3,13 @@ package sda.ispeak.prework.models.dtos.user;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDtoToReturn {
+@ToString
+public class UserProfile {
 
     private long id;
     private String userName;
