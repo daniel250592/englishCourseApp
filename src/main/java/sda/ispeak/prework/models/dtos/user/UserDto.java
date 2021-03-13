@@ -3,6 +3,7 @@ package sda.ispeak.prework.models.dtos.user;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import sda.ispeak.prework.models.validations.theSamePasswordsVlidator.TheSamePasswordsValidator;
 
 import javax.validation.constraints.Email;
@@ -14,6 +15,7 @@ import javax.validation.constraints.Size;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class UserDto {
 
     @Email(message = "zły format e-maila")
@@ -33,6 +35,7 @@ public class UserDto {
     public String getEmail() {
         return email;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }

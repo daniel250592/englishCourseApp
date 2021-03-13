@@ -1,7 +1,6 @@
 package sda.ispeak.prework.services;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -10,7 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import sda.ispeak.prework.models.dtos.user.UserDto;
-import sda.ispeak.prework.models.dtos.user.UserDtoToReturn;
+import sda.ispeak.prework.models.dtos.user.UserProfile;
 import sda.ispeak.prework.models.emails.EmailSender;
 import sda.ispeak.prework.models.exceptions.NoSuchUserException;
 import sda.ispeak.prework.models.exceptions.UserExistException;
@@ -63,7 +62,7 @@ class UserServiceTest {
                 .build();
         when(userRepository.save(any())).thenReturn(expectedUser);
 
-        UserDtoToReturn save = userService.save(userDto);
+        UserProfile save = userService.save(userDto);
 
         assertThat(save.getId()).isEqualTo(11);
     }
@@ -92,7 +91,7 @@ class UserServiceTest {
 
     @Test
     void shouldReturnIdNotNull(){
-        when(userRepository.findById(1L)).thenReturn(Optional.of(User.builder()
+        when(userRepository.findById(any())).thenReturn(Optional.of(User.builder()
                 .id(1)
                 .build()));
 
@@ -100,7 +99,7 @@ class UserServiceTest {
                 .id(1)
                 .build());
 
-        UserDtoToReturn user = userService.activateUserWithGivenId(1L);
+        UserProfile user = userService.activateUserWithGivenId(1L);
 
         assertThat(user.getId()).isEqualTo(1);
     }
@@ -108,7 +107,7 @@ class UserServiceTest {
     @Test
     void shouldThrowNoSuchUserException() {
 
-        when(userRepository.findById(any())).thenThrow(new NoSuchUserException("Użytkownik o podanym ID nie istnieje"));
+        when(userRepository.findById(any())).thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> userService.activateUserWithGivenId(1L))
                 .isExactlyInstanceOf(NoSuchUserException.class)
@@ -119,7 +118,7 @@ class UserServiceTest {
     @Test
     void shouldReturnActiveAccount(){
         User user = new User();
-        user.setActive(true);
+        user.setActive(false);
 
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
 
@@ -128,7 +127,7 @@ class UserServiceTest {
                 .active(true)
                 .build());
 
-        UserDtoToReturn withGivenId = userService.activateUserWithGivenId(1L);
+        UserProfile withGivenId = userService.activateUserWithGivenId(1L);
 
         assertThat(withGivenId.isActive()).isEqualTo(true);
     }
