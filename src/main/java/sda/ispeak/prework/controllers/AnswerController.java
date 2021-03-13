@@ -1,11 +1,10 @@
 package sda.ispeak.prework.controllers;
 
-
+/*
 
 import org.springframework.web.bind.annotation.*;
 import sda.ispeak.prework.models.dtos.AnswerDto;
 import sda.ispeak.prework.models.forms.FourAnswersForm;
-import sda.ispeak.prework.models.questions.Answer;
 import sda.ispeak.prework.models.questions.Question;
 import sda.ispeak.prework.services.AnswerService;
 
@@ -16,7 +15,7 @@ import java.util.List;
 @RequestMapping("/admin/answers")
 public class AnswerController {
 
-    private final AnswerService answerService;
+   private final AnswerService answerService;
 
     public AnswerController(AnswerService answerService) {
         this.answerService = answerService;
@@ -50,6 +49,6 @@ public class AnswerController {
     @PostMapping("/add-four-answers-to-question/{id}")
     public Question addFourAnswers(@RequestBody FourAnswersForm fourAnswersForm, @PathVariable long id){
         return answerService.connectAnswersToQuestion(id,fourAnswersForm);
-    }
+    }*/
 
-}
+

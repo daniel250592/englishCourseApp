@@ -19,8 +19,8 @@ public class QuestionController {
     }
 
     @PostMapping("/add-new-question")
-    public Question addQuestion(@RequestBody QuestionDto questionDto) {
-        return questionService.save(questionDto);
+    public Question addQuestion(@RequestBody Question question) {
+        return questionService.save(question);
     }
 
     @GetMapping("/get-all-questions")

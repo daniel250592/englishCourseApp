@@ -10,31 +10,24 @@ import java.util.Set;
 public class Question {
 
     @Id
-    @GeneratedValue
     private long id;
 
-    @Enumerated(EnumType.STRING)
-    private QuestionSubject subject;
-
-
     private String content;
+    private String questionSubject;
 
-    @OneToMany
-    private Set<Answer> answers;
+    private String firstAnswerContent;
+    private String secondAnswerContent;
+    private String thirdAnswerContent;
+    private String fourthAnswerContent;
+
+
+    private boolean firstCorrect = false;
+    private boolean secondCorrect = false;
+    private boolean thirdCorrect = false;
+    private boolean fourthCorrect = false;
 
 
     public Question() {
-    }
-
-    public Question(String subject, String content, Set<Answer> answers) {
-        this.subject = QuestionSubject.valueOf(subject);
-        this.content = content;
-        this.answers = answers;
-    }
-
-    public Question(String subject, String content) {
-        this.subject = QuestionSubject.valueOf(subject);
-        this.content = content;
     }
 
     public long getId() {
@@ -45,14 +38,6 @@ public class Question {
         this.id = id;
     }
 
-    public QuestionSubject getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = QuestionSubject.valueOf(subject);
-    }
-
     public String getContent() {
         return content;
     }
@@ -61,11 +46,76 @@ public class Question {
         this.content = content;
     }
 
-    public Set<Answer> getAnswers() {
-        return answers;
+    public String getQuestionSubject() {
+        return questionSubject;
     }
 
-    public void setAnswers(Set<Answer> answers) {
-        this.answers = answers;
+    public void setQuestionSubject(String questionSubject) {
+        this.questionSubject = questionSubject;
     }
+
+    public String getFirstAnswerContent() {
+        return firstAnswerContent;
+    }
+
+    public void setFirstAnswerContent(String firstAnswerContent) {
+        this.firstAnswerContent = firstAnswerContent;
+    }
+
+    public String getSecondAnswerContent() {
+        return secondAnswerContent;
+    }
+
+    public void setSecondAnswerContent(String secondAnswerContent) {
+        this.secondAnswerContent = secondAnswerContent;
+    }
+
+    public String getThirdAnswerContent() {
+        return thirdAnswerContent;
+    }
+
+    public void setThirdAnswerContent(String thirdAnswerContent) {
+        this.thirdAnswerContent = thirdAnswerContent;
+    }
+
+    public String getFourthAnswerContent() {
+        return fourthAnswerContent;
+    }
+
+    public void setFourthAnswerContent(String fourthAnswerContent) {
+        this.fourthAnswerContent = fourthAnswerContent;
+    }
+
+    public boolean isFirstCorrect() {
+        return firstCorrect;
+    }
+
+    public void setFirstCorrect(boolean firstCorrect) {
+        this.firstCorrect = firstCorrect;
+    }
+
+    public boolean isSecondCorrect() {
+        return secondCorrect;
+    }
+
+    public void setSecondCorrect(boolean secondCorrect) {
+        this.secondCorrect = secondCorrect;
+    }
+
+    public boolean isThirdCorrect() {
+        return thirdCorrect;
+    }
+
+    public void setThirdCorrect(boolean thirdCorrect) {
+        this.thirdCorrect = thirdCorrect;
+    }
+
+    public boolean isFourthCorrect() {
+        return fourthCorrect;
+    }
+
+    public void setFourthCorrect(boolean fourthCorrect) {
+        this.fourthCorrect = fourthCorrect;
+    }
+
 }

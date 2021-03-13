@@ -1,13 +1,11 @@
 package sda.ispeak.prework.services;
-
+/*
 import org.springframework.stereotype.Service;
 import sda.ispeak.prework.models.dtos.AnswerDto;
 import sda.ispeak.prework.models.forms.FourAnswersForm;
 import sda.ispeak.prework.models.mappers.AnswerMapper;
 import sda.ispeak.prework.models.mappers.FourAnswersMapper;
-import sda.ispeak.prework.models.questions.Answer;
 import sda.ispeak.prework.models.questions.Question;
-import sda.ispeak.prework.repositories.AnswerRepository;
 
 import java.util.HashSet;
 import java.util.List;
@@ -70,3 +68,4 @@ public class AnswerService {
         return answerRepository.findAll();
     }
 }
+*/

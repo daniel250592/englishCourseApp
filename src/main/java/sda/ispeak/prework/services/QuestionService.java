@@ -17,17 +17,18 @@ public class QuestionService {
         this.questionRepository = questionRepository;
     }
 
-    public Question save(QuestionDto questionDto) {
-        return questionRepository.save(QuestionMapper.map(questionDto));
+    public Question save(Question question) {
+        return questionRepository.save(question);
     }
 
     public List<Question> getAllQuestions() {
         return questionRepository.findAll();
     }
 
-    public long saveQuestionAndReturnId(QuestionDto questionDto) {
-        return questionRepository.save(QuestionMapper.map(questionDto)).getId();
+    public Object saveQuestionAndReturnId(QuestionDto questionDto) {
+        return null;
     }
+    /** TODO tu trzeba zmienić na odpowiednie DTO **/
 
     public Question getQuestionById(long id) {
         return questionRepository.findById(id).orElseThrow();
