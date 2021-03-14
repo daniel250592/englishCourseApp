@@ -2,6 +2,7 @@ package sda.ispeak.prework.controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.ObjectError;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import sda.ispeak.prework.models.exceptions.IspeakException;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class ErrorAdvice {
@@ -31,9 +32,11 @@ public class ErrorAdvice {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Object> handleException(MethodArgumentNotValidException exception) {
         List<ObjectError> allErrors = exception.getAllErrors();
-        ObjectError objectError = allErrors.stream().findAny().get();
-        LOG.error("exception message {}", objectError.getDefaultMessage());
-        return new ResponseEntity<>(objectError.getDefaultMessage(), HttpStatus.BAD_REQUEST);
+        String allErrorsString = allErrors.stream()
+                .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                .collect(Collectors.joining(";"));
+        LOG.error("exception message {}", allErrorsString);
+        return new ResponseEntity<>(allErrorsString, HttpStatus.BAD_REQUEST);
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
