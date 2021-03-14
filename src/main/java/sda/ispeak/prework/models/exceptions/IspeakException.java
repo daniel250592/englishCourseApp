@@ -1,8 +1,8 @@
 package sda.ispeak.prework.models.exceptions;
 
-public class NoSuchUserException extends IspeakException {
+public class IspeakException extends RuntimeException {
 
-    public NoSuchUserException(String message) {
+    public IspeakException(String message) {
         super(message);
     }
 

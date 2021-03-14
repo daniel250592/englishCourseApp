@@ -1,12 +1,8 @@
 package sda.ispeak.prework.controllers;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import sda.ispeak.prework.models.dtos.user.UserDto;
+import sda.ispeak.prework.models.dtos.user.NewUserDto;
 import sda.ispeak.prework.models.dtos.user.UserProfile;
-import sda.ispeak.prework.models.exceptions.NoSuchUserException;
-import sda.ispeak.prework.models.exceptions.UserExistException;
 import sda.ispeak.prework.services.UserService;
 
 import javax.validation.Valid;
@@ -22,25 +18,13 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/add-new-user")
-    public UserProfile addNewUser(@RequestBody @Valid UserDto userDto) {
-        return userService.save(userDto);
+    @PostMapping()
+    public UserProfile addNewUser(@RequestBody @Valid NewUserDto newUserDto) {
+        return userService.save(newUserDto);
     }
 
-    @GetMapping("/activate-your-account{id}")
+    @GetMapping("/activate-account/{id}")
     public UserProfile activateUserAccount(@PathVariable long id) {
         return userService.activateUserWithGivenId(id);
-    }
-
-    //TODO tu jest coś zle, ale nie wiem co
-
-    @ExceptionHandler(value = RuntimeException.class)
-    public ResponseEntity<Object> handleNoSuchElementException(UserExistException userExistException) {
-        return new ResponseEntity<>(userExistException.getMessage(), HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler(value = RuntimeException.class)
-    public ResponseEntity<Object> handleNoSuchElementException(NoSuchUserException noSuchUserException) {
-        return new ResponseEntity<>(noSuchUserException.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }
