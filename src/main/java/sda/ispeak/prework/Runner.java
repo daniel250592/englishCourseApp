@@ -41,13 +41,6 @@ public class Runner implements CommandLineRunner {
     @Autowired
     UserRepository userRepository;
 
-    @Autowired
-    TopicService topicService;
-
-    @Autowired
-    TopicRepository topicRepository;
-
-
     @Override
     public void run(String... args) {
 
@@ -86,20 +79,10 @@ public class Runner implements CommandLineRunner {
 
             QuestionSubject futureSimple = QuestionSubject.valueOf("FutureSimple");
 
-            Topic topic1 = new Topic(1,"Present Simple");
-            Topic topic2 = new Topic(2,"Present Continous");
-            Topic topic5 = new Topic(5,"Present Perfect Simple");
-            Topic topic3 = new Topic(3,"Present Perfect Continous");
-topicRepository.save(topic1);
-topicRepository.save(topic2);
-topicRepository.save(topic5);
-topicRepository.save(topic3);
-
 
         } catch (Exception e) {
             log.error("Nie inicjuje bazy - problem ", e);
         }
-
 
     }
 }
