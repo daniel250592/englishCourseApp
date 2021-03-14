@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface TheSamePasswordsValidator {
 
-    String message() default "hasła różnią się";
+    String message() default "Hasła różnią się";
 
     Class<?>[] groups() default {};
 

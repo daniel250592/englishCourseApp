@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import sda.ispeak.prework.models.dtos.user.UserDto;
+import sda.ispeak.prework.models.dtos.user.NewUserDto;
 import sda.ispeak.prework.models.dtos.user.UserProfile;
 import sda.ispeak.prework.models.emails.EmailGenerator;
 import sda.ispeak.prework.models.emails.EmailSender;
@@ -35,21 +35,19 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public UserProfile save(UserDto userDto) {
-        User user = UserMapper.map(userDto);
+    public UserProfile save(NewUserDto newUserDto) {
+        User user = UserMapper.map(newUserDto);
         checkIfUserAlreadyExist(user);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user = userRepository.save(user);
         emailSender.sendEmail(EmailGenerator.generateEmail(user));
         return UserMapper.map(user);
-
     }
 
     public UserProfile activateUserWithGivenId(long id) {
         User user = findUserById(id);
         user.setActive(true);
         return UserMapper.map(updateUser(user));
-
     }
 
     private User updateUser(User user) {
@@ -58,14 +56,13 @@ public class UserService implements UserDetailsService {
 
     private void checkIfUserAlreadyExist(User user) {
 
-        Optional<User> byEmailAndUserName = userRepository.findByEmailAndUserName(user.getEmail(), user.getUserName());
+        Optional<User> byEmailAndUserName = userRepository.findByEmailOrUserName(user.getEmail(), user.getUserName());
 
         if (byEmailAndUserName.isPresent()) {
             throw new UserExistException("Użytkownik taki już istnieje");
         }
     }
 
-    //TODO ten wyjątek nie jest rzucany nie mam pojecia dlaczego.
     private User findUserById(long id) {
         Optional<User> user = userRepository.findById(id);
 
@@ -81,7 +78,6 @@ public class UserService implements UserDetailsService {
 //        }
     }
 
-    //TODO nie da sie zalogować poprzez sztywnego uzytkownika
     @Override
     public UserDetails loadUserByUsername(String s) {
         User user = userRepository.findUserByUserName(s);
