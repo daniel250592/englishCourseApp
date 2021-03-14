@@ -11,8 +11,10 @@ import javax.validation.constraints.Size;
 @ToString
 @Builder
 @AllArgsConstructor
-public class QuestionDto {
+public class NewQuestionDto {
 
+    @NotBlank(message = "Wpisz id")
+    @NotNull(message = "Wpisz id")
     private long id;
 
     @NotBlank(message = "Wpisz pytanie")
@@ -45,7 +47,7 @@ public class QuestionDto {
     private boolean fourthCorrect = false;
 
 
-    public QuestionDto() {
+    public NewQuestionDto() {
     }
 
     public long getId() {

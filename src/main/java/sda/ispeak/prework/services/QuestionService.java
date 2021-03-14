@@ -1,14 +1,18 @@
 package sda.ispeak.prework.services;
 
 import org.springframework.stereotype.Service;
-import sda.ispeak.prework.models.dtos.QuestionDto;
+import sda.ispeak.prework.models.dtos.NewQuestionDto;
+import sda.ispeak.prework.models.dtos.QuestionProfileDto;
 import sda.ispeak.prework.models.mappers.QuestionMapper;
 import sda.ispeak.prework.models.questions.Question;
 import sda.ispeak.prework.repositories.QuestionRepository;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
+
 public class QuestionService {
 
     private final QuestionRepository questionRepository;
@@ -17,18 +21,22 @@ public class QuestionService {
         this.questionRepository = questionRepository;
     }
 
-    public Question save(Question question) {
-        return questionRepository.save(question);
+    public QuestionProfileDto save(NewQuestionDto newQuestionDto) {
+        Question question = QuestionMapper.map(newQuestionDto);
+        Question save = questionRepository.save(question);
+        return QuestionMapper.map(save);
     }
 
-    public List<Question> getAllQuestions() {
-        return questionRepository.findAll();
+    public List<QuestionProfileDto> getAllQuestions() {
+            return questionRepository.findAll().stream()
+                    .map(QuestionMapper::map)
+                    .collect(Collectors.toList());
     }
 
-    public Object saveQuestionAndReturnId(QuestionDto questionDto) {
+    public Object saveQuestionAndReturnId(NewQuestionDto newQuestionDto) {
         return null;
     }
-    /** TODO tu trzeba zmienić na odpowiednie DTO **/
+
 
     public Question getQuestionById(long id) {
         return questionRepository.findById(id).orElseThrow();
