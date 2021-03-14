@@ -16,7 +16,8 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @ToString
 @TheSamePasswordsValidator
-public class UserDto {
+public class NewUserDto {
+    //TODO zmienic nazwe
 
     @Email(message = "Zły format e-maila")
     private String email;

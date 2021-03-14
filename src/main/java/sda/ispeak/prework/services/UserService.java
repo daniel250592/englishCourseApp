@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import sda.ispeak.prework.models.dtos.user.UserDto;
+import sda.ispeak.prework.models.dtos.user.NewUserDto;
 import sda.ispeak.prework.models.dtos.user.UserProfile;
 import sda.ispeak.prework.models.emails.EmailGenerator;
 import sda.ispeak.prework.models.emails.EmailSender;
@@ -35,8 +35,8 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public UserProfile save(UserDto userDto) {
-        User user = UserMapper.map(userDto);
+    public UserProfile save(NewUserDto newUserDto) {
+        User user = UserMapper.map(newUserDto);
         checkIfUserAlreadyExist(user);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user = userRepository.save(user);

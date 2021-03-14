@@ -1,16 +1,16 @@
 package sda.ispeak.prework.models.mappers;
 
-import sda.ispeak.prework.models.dtos.user.UserDto;
+import sda.ispeak.prework.models.dtos.user.NewUserDto;
 import sda.ispeak.prework.models.dtos.user.UserProfile;
 import sda.ispeak.prework.models.users.User;
 
 public class UserMapper {
 
-    public static User map(UserDto userDto) {
+    public static User map(NewUserDto newUserDto) {
         return User.builder()
-                .email(userDto.getEmail())
-                .userName(userDto.getUserName())
-                .password(userDto.getPassword())
+                .email(newUserDto.getEmail())
+                .userName(newUserDto.getUserName())
+                .password(newUserDto.getPassword())
                 .role("USER")
                 .active(false)
                 .build();

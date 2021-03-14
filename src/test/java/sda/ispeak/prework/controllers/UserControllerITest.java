@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import sda.ispeak.prework.models.dtos.user.UserDto;
+import sda.ispeak.prework.models.dtos.user.NewUserDto;
 import sda.ispeak.prework.models.dtos.user.UserProfile;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,23 +18,23 @@ class UserControllerITest {
     @Test
     void shouldReturnTrue() {
 
-        UserDto userDto = UserDto.builder()
+        NewUserDto newUserDto = NewUserDto.builder()
                 .email("test@test.com")
                 .password("example123")
                 .confirmedPassword("example123")
                 .userName("test")
                 .build();
 
-        UserProfile userProfile = userController.addNewUser(userDto);
+        UserProfile userProfile = userController.addNewUser(newUserDto);
 
-        assertThat(userProfile.getEmail()).isEqualTo(userDto.getEmail());
+        assertThat(userProfile.getEmail()).isEqualTo(newUserDto.getEmail());
     }
 
     @Test
     @Disabled
     void shouldReturnFalse() {
 
-        UserDto userDto = UserDto.builder()
+        NewUserDto newUserDto = NewUserDto.builder()
                 .email("test@example.com")
                 .password("example123")
                 .confirmedPassword("example123")

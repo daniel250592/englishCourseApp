@@ -1,7 +1,7 @@
 package sda.ispeak.prework.models.mappers;
 
 import org.junit.jupiter.api.Test;
-import sda.ispeak.prework.models.dtos.user.UserDto;
+import sda.ispeak.prework.models.dtos.user.NewUserDto;
 import sda.ispeak.prework.models.dtos.user.UserProfile;
 import sda.ispeak.prework.models.users.User;
 
@@ -29,48 +29,20 @@ class UserMapperTest {
     }
 
     @Test
-    void shouldAssertUserProfileIsNull() {
-        User user = User.builder()
-                .build();
-
-        UserProfile userProfile = UserMapper.map(user);
-
-        assertThat(userProfile.getUserName()).isNull();
-        assertThat(userProfile.getId()).isZero();
-        assertThat(userProfile.getEmail()).isNull();
-        assertThat(userProfile.isActive()).isFalse();
-    }
-
-    @Test
     void shouldAssertUserNotNull(){
-        UserDto userDto = UserDto.builder()
+        NewUserDto newUserDto = NewUserDto.builder()
                 .email("test@example.com")
                 .userName("test")
                 .password("test12345")
                 .confirmedPassword("test12345")
                 .build();
 
-        User user = UserMapper.map(userDto);
+        User user = UserMapper.map(newUserDto);
 
         assertThat(user.getId()).isZero();
-        assertThat(user.getEmail()).isEqualTo(userDto.getEmail());
-        assertThat(user.getUserName()).isEqualTo(userDto.getUserName());
-        assertThat(user.getPassword()).isEqualTo(userDto.getPassword());
-        assertThat(user.getRole()).isEqualTo("USER");
-        assertThat(user.isActive()).isFalse();
-    }
-
-    @Test
-    void shouldAssertUserIsNull(){
-        UserDto userDto = UserDto.builder()
-                .build();
-
-        User user = UserMapper.map(userDto);
-
-        assertThat(user.getId()).isZero();
-        assertThat(user.getEmail()).isNull();
-        assertThat(user.getUserName()).isNull();
-        assertThat(user.getPassword()).isNull();
+        assertThat(user.getEmail()).isEqualTo(newUserDto.getEmail());
+        assertThat(user.getUserName()).isEqualTo(newUserDto.getUserName());
+        assertThat(user.getPassword()).isEqualTo(newUserDto.getPassword());
         assertThat(user.getRole()).isEqualTo("USER");
         assertThat(user.isActive()).isFalse();
     }

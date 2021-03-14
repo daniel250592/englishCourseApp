@@ -1,19 +1,19 @@
 package sda.ispeak.prework.models.validations.theSamePasswordsVlidator;
 
 import org.apache.commons.lang3.StringUtils;
-import sda.ispeak.prework.models.dtos.user.UserDto;
+import sda.ispeak.prework.models.dtos.user.NewUserDto;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class TheSamePasswordsValidatorImpl implements ConstraintValidator<TheSamePasswordsValidator, UserDto> {
+public class TheSamePasswordsValidatorImpl implements ConstraintValidator<TheSamePasswordsValidator, NewUserDto> {
 
     @Override
-    public boolean isValid(UserDto userDto, ConstraintValidatorContext constraintValidatorContext) {
-        if (StringUtils.isEmpty(userDto.getPassword()) || StringUtils.isEmpty(userDto.getConfirmedPassword())) {
+    public boolean isValid(NewUserDto newUserDto, ConstraintValidatorContext constraintValidatorContext) {
+        if (StringUtils.isEmpty(newUserDto.getPassword()) || StringUtils.isEmpty(newUserDto.getConfirmedPassword())) {
             return false;
         }
-        return userDto.getPassword().equals(userDto.getConfirmedPassword());
+        return newUserDto.getPassword().equals(newUserDto.getConfirmedPassword());
     }
 }
 

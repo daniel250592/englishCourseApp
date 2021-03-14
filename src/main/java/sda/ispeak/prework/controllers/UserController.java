@@ -1,7 +1,7 @@
 package sda.ispeak.prework.controllers;
 
 import org.springframework.web.bind.annotation.*;
-import sda.ispeak.prework.models.dtos.user.UserDto;
+import sda.ispeak.prework.models.dtos.user.NewUserDto;
 import sda.ispeak.prework.models.dtos.user.UserProfile;
 import sda.ispeak.prework.services.UserService;
 
@@ -18,12 +18,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/new-user")
-    public UserProfile addNewUser(@RequestBody @Valid UserDto userDto) {
-        return userService.save(userDto);
+    @PostMapping()
+    public UserProfile addNewUser(@RequestBody @Valid NewUserDto newUserDto) {
+        return userService.save(newUserDto);
     }
 
-    @GetMapping("/activate-account{id}")
+    @GetMapping("/activate-account/{id}")
     public UserProfile activateUserAccount(@PathVariable long id) {
         return userService.activateUserWithGivenId(id);
     }
