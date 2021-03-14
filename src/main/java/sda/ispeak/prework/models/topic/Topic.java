@@ -1,11 +1,13 @@
 package sda.ispeak.prework.models.topic;
 
+import lombok.Builder;
 import sda.ispeak.prework.models.questions.Question;
 import sda.ispeak.prework.models.users.User;
 
 import javax.persistence.*;
 import java.util.Set;
 
+@Builder
 @Entity
 public class Topic {
 

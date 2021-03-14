@@ -6,6 +6,7 @@ import sda.ispeak.prework.models.mappers.TopicMapper;
 import sda.ispeak.prework.models.topic.Topic;
 import sda.ispeak.prework.repositories.TopicRepository;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,7 +19,10 @@ public class TopicService {
         this.topicRepository = topicRepository;
     }
 
+
     public List<TopicDto> getAllTopics(){
-        return topicRepository.findAll().stream().sorted().map(TopicMapper::map).collect(Collectors.toList());
+        return topicRepository.findAll().stream()
+                .sorted(Comparator.comparing(Topic::getId)).map(TopicMapper::mapToTopicList)
+                .collect(Collectors.toList());
     }
 }
