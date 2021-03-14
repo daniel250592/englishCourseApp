@@ -30,8 +30,8 @@ class UserServiceITTest {
     @BeforeEach
     void returnUser() {
         this.userDto = new UserDto();
-        this.userDto.setUserName("test");
-        this.userDto.setEmail("test@example.com");
+        this.userDto.setUserName("testtest");
+        this.userDto.setEmail("test@exampletest.com");
         this.userDto.setPassword("password");
         this.userDto.setConfirmedPassword("password");
 
