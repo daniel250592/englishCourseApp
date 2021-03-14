@@ -1,15 +1,24 @@
 package sda.ispeak.prework.models.mappers;
 
-import sda.ispeak.prework.models.dtos.TopicDto;
+import sda.ispeak.prework.models.dtos.NewTopicDto;
+import sda.ispeak.prework.models.dtos.TopicProfile;
 import sda.ispeak.prework.models.topic.Topic;
 
 
 public class TopicMapper {
 
-    public static TopicDto mapToTopicList(Topic topic) {
+    public static Topic map(NewTopicDto newTopicDto) {
+        return Topic.builder()
+                .id(newTopicDto.getId())
+                .content(newTopicDto.getContent())
+                .name(newTopicDto.getName())
+                .build();
+    }
 
-        return TopicDto.builder()
+    public static TopicProfile map(Topic topic) {
+        return TopicProfile.builder()
                 .id(topic.getId())
+                .content(topic.getContent())
                 .name(topic.getName())
                 .build();
     }

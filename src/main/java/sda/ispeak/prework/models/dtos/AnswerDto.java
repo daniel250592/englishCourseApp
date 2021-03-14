@@ -4,7 +4,7 @@ public class AnswerDto {
 
     private String answerContent;
 
-    private boolean isCorrect =false;
+    private boolean isCorrect = false;
 
     public AnswerDto() {
     }

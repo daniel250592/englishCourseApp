@@ -2,7 +2,6 @@ package sda.ispeak.prework.models.forms;
 
 import lombok.ToString;
 import sda.ispeak.prework.models.questions.Question;
-import sda.ispeak.prework.models.validations.theSamePasswordsVlidator.TheSamePasswordsValidator;
 
 @ToString
 public class FourAnswersForm {

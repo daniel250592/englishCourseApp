@@ -1,25 +1,19 @@
-package sda.ispeak.prework.models.topic;
+package sda.ispeak.prework.models.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
 @Builder
-@Entity
 @ToString
 @AllArgsConstructor
-public class Topic {
+public class TopicProfile {
 
-    @Id
     private long id;
-
     private String name;
     private String content;
 
-    public Topic() {
+    public TopicProfile() {
     }
 
     public long getId() {

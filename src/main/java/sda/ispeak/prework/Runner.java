@@ -2,27 +2,15 @@ package sda.ispeak.prework;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import sda.ispeak.prework.models.dtos.TopicDto;
-import sda.ispeak.prework.models.mappers.TopicMapper;
+import sda.ispeak.prework.controllers.TopicController;
+import sda.ispeak.prework.models.dtos.NewTopicDto;
 import sda.ispeak.prework.models.dtos.user.NewUserDto;
-import sda.ispeak.prework.models.questions.Answer;
-import sda.ispeak.prework.models.questions.Question;
-import sda.ispeak.prework.models.questions.QuestionSubject;
-import sda.ispeak.prework.models.topic.Quiz;
-import sda.ispeak.prework.models.topic.Topic;
 import sda.ispeak.prework.models.users.User;
-import sda.ispeak.prework.repositories.AnswerRepository;
 import sda.ispeak.prework.repositories.QuestionRepository;
-import sda.ispeak.prework.repositories.TopicRepository;
 import sda.ispeak.prework.repositories.UserRepository;
-import sda.ispeak.prework.services.TopicService;
 import sda.ispeak.prework.services.UserService;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Component
 @Slf4j
@@ -33,13 +21,13 @@ public class Runner implements CommandLineRunner {
     QuestionRepository questionRepository;
 
     @Autowired
-    AnswerRepository answerRepository;
-
-    @Autowired
     UserService userService;
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    TopicController topicController;
 
     @Override
     public void run(String... args) {
@@ -60,24 +48,31 @@ public class Runner implements CommandLineRunner {
 
             userService.save(newUserDto);
 
-            Answer answerA = new Answer("Good morning", true);
-            Answer answerB = new Answer("Guten Dag", false);
+            NewTopicDto newTopicDto = NewTopicDto.builder()
+                    .id(1)
+                    .content("Mój kontent")
+                    .name("Mój pierwszy topic")
+                    .build();
+            topicController.addNewTopic(newTopicDto);
 
-            Answer save = answerRepository.save(answerA);
-            Answer answer = answerRepository.save(answerB);
-
-
-            Set<Answer> answers = new HashSet<>();
-            answers.add(save);
-            answers.add(answer);
-            Question question = new Question("PresentSimple", "Jak jest dzien dobry po angielsku?");
-
-
-            questionRepository.save(question);
-
-            Set<Answer> answers1 = question.getAnswers();
-
-            QuestionSubject futureSimple = QuestionSubject.valueOf("FutureSimple");
+//            Answer answerA = new Answer("Good morning", true);
+//            Answer answerB = new Answer("Guten Dag", false);
+//
+//            Answer save = answerRepository.save(answerA);
+//            Answer answer = answerRepository.save(answerB);
+//
+//
+//            Set<Answer> answers = new HashSet<>();
+//            answers.add(save);
+//            answers.add(answer);
+//            Question question = new Question("PresentSimple", "Jak jest dzien dobry po angielsku?");
+//
+//
+//            questionRepository.save(question);
+//
+//            Set<Answer> answers1 = question.getAnswers();
+//
+//            QuestionSubject futureSimple = QuestionSubject.valueOf("FutureSimple");
 
 
         } catch (Exception e) {
