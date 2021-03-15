@@ -5,7 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import sda.ispeak.prework.models.dtos.TopicToListDto;
+import sda.ispeak.prework.models.dtos.TopicProfile;
 import sda.ispeak.prework.models.topic.Topic;
 import sda.ispeak.prework.repositories.TopicRepository;
 
@@ -35,7 +35,7 @@ class TopicServiceTest{
                         .id(1L)
                         .build()));
 
-        List<TopicToListDto> result = sut.getAllTopics();
+        List<TopicProfile> result = sut.getAllTopics();
 
         assertThat(result).hasSize(2);
         assertThat(result.get(0).getId()).isEqualTo(1L);

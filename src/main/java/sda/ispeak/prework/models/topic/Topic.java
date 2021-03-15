@@ -1,12 +1,18 @@
 package sda.ispeak.prework.models.topic;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import sda.ispeak.prework.models.questions.Question;
 import sda.ispeak.prework.models.users.User;
 
 import javax.persistence.*;
 import java.util.Set;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Builder
 @Entity
 public class Topic {
@@ -21,20 +27,6 @@ public class Topic {
     @OneToMany
     private Set<User> users;
 
-    public Topic() {
-    }
-
-    public Topic(long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public Topic(long id, String name, String content, Set<User> users) {
-        this.id = id;
-        this.name = name;
-        this.content = content;
-        this.users = users;
-    }
 
     public long getId() {
         return id;
@@ -70,13 +62,4 @@ public class Topic {
         this.users = users;
     }
 
-    @Override
-    public String toString() {
-        return "Topic{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", content='" + content + '\'' +
-                ", users=" + users +
-                '}';
-    }
 }

@@ -6,7 +6,7 @@ import lombok.Builder;
 import javax.validation.constraints.Size;
 
 @Builder
-public class TopicToListDto {
+public class TopicProfile {
 
 
     private long id;

@@ -2,7 +2,7 @@ package sda.ispeak.prework.controllers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import sda.ispeak.prework.models.dtos.TopicToListDto;
+import sda.ispeak.prework.models.dtos.TopicProfile;
 import sda.ispeak.prework.services.TopicService;
 
 import java.util.List;
@@ -16,8 +16,9 @@ public class TopicController {
 
 
     @GetMapping()
-    public List<TopicToListDto> getAllTopics() {
+    public List<TopicProfile> getAllTopics() {
 
         return service.getAllTopics();
     }
+
 }
