@@ -1,15 +1,42 @@
-package sda.ispeak.prework.models.forms;
+package sda.ispeak.prework.models.dtos;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.ToString;
-import sda.ispeak.prework.models.questions.Question;
-import sda.ispeak.prework.models.validations.theSamePasswordsVlidator.TheSamePasswordsValidator;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @ToString
-public class FourAnswersForm {
+@Builder
+@AllArgsConstructor
+public class NewQuestionDto {
 
+    @Min(message = "Wpisz id", value = 0L)
+    private long id;
+
+    @NotBlank(message = "Wpisz pytanie")
+    @NotNull(message = "Wpisz pytanie")
+    @Size(min = 10, max = 200, message = "Twoje pytanie nie spełnia standardów")
+    private String question;
+
+    @NotBlank(message = "Wpisz odpowiedź pierwszą")
+    @NotNull(message = "Wpisz odpowiedź pierwszą")
+    @Size(min = 1, max = 100, message = "Podana odpowiedź nie spełnia standardów")
     private String firstAnswerContent;
+    @NotBlank(message = "Wpisz odpowiedź drugą")
+    @NotNull(message = "Wpisz odpowiedź drugą")
+    @Size(min = 1, max = 100, message = "Podana odpowiedź nie spełnia standardów")
     private String secondAnswerContent;
+    @NotBlank(message = "Wpisz odpowiedź trzecią")
+    @NotNull(message = "Wpisz odpowiedź trzecią")
+    @Size(min = 1, max = 100, message = "Podana odpowiedź nie spełnia standardów")
     private String thirdAnswerContent;
+    @NotBlank(message = "Wpisz odpowiedź czwartą")
+    @NotNull(message = "Wpisz odpowiedź czwartą")
+    @Size(min = 1, max = 100, message = "Podana odpowiedź nie spełnia standardów")
     private String fourthAnswerContent;
 
 
@@ -18,17 +45,23 @@ public class FourAnswersForm {
     private boolean thirdCorrect = false;
     private boolean fourthCorrect = false;
 
-    private Question question;
 
-    public FourAnswersForm() {
-
+    public NewQuestionDto() {
     }
 
-    public Question getQuestion() {
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getQuestion() {
         return question;
     }
 
-    public void setQuestion(Question question) {
+    public void setQuestion(String question) {
         this.question = question;
     }
 
@@ -95,4 +128,5 @@ public class FourAnswersForm {
     public void setFourthCorrect(boolean fourthCorrect) {
         this.fourthCorrect = fourthCorrect;
     }
+
 }

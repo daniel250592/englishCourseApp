@@ -1,30 +1,25 @@
-package sda.ispeak.prework.models.questions;
+package sda.ispeak.prework.models.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.ToString;
 
-import javax.persistence.*;
-import java.util.Set;
 
-@Entity
+
 @ToString
 @Builder
 @AllArgsConstructor
-public class Question {
+public class QuestionProfileDto {
 
-    @Id
     private long id;
 
-
-
     private String question;
+
 
     private String firstAnswerContent;
     private String secondAnswerContent;
     private String thirdAnswerContent;
     private String fourthAnswerContent;
-
 
     private boolean firstCorrect = false;
     private boolean secondCorrect = false;
@@ -32,7 +27,7 @@ public class Question {
     private boolean fourthCorrect = false;
 
 
-    public Question() {
+    public QuestionProfileDto() {
     }
 
     public long getId() {
@@ -43,7 +38,6 @@ public class Question {
         this.id = id;
     }
 
-
     public String getQuestion() {
         return question;
     }
@@ -51,6 +45,7 @@ public class Question {
     public void setQuestion(String question) {
         this.question = question;
     }
+
     public String getFirstAnswerContent() {
         return firstAnswerContent;
     }
