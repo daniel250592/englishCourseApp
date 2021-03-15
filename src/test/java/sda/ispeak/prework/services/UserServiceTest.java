@@ -8,7 +8,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import sda.ispeak.prework.models.dtos.user.UserDto;
+import sda.ispeak.prework.models.dtos.user.NewUserDto;
 import sda.ispeak.prework.models.dtos.user.UserProfile;
 import sda.ispeak.prework.models.emails.EmailSender;
 import sda.ispeak.prework.models.exceptions.NoSuchUserException;
@@ -39,16 +39,16 @@ class UserServiceTest {
     private EmailSender emailSender;
 
 
-    private UserDto userDto;
+    private NewUserDto newUserDto;
 
 
     @BeforeEach
     void returnUser() {
-        this.userDto = new UserDto();
-        this.userDto.setUserName("test");
-        this.userDto.setEmail("test@example.com");
-        this.userDto.setPassword("password");
-        this.userDto.setConfirmedPassword("password");
+        this.newUserDto = new NewUserDto();
+        this.newUserDto.setUserName("test");
+        this.newUserDto.setEmail("test@example.com");
+        this.newUserDto.setPassword("password");
+        this.newUserDto.setConfirmedPassword("password");
 
     }
 
@@ -62,7 +62,7 @@ class UserServiceTest {
                 .build();
         when(userRepository.save(any())).thenReturn(expectedUser);
 
-        UserProfile save = userService.save(userDto);
+        UserProfile save = userService.save(newUserDto);
 
         assertThat(save.getId()).isEqualTo(11);
     }
@@ -72,7 +72,7 @@ class UserServiceTest {
 
         when(userRepository.save(any())).thenThrow(new UserExistException("Użytkownik taki już istnieje"));
 
-        assertThatThrownBy(() -> userService.save(userDto))
+        assertThatThrownBy(() -> userService.save(newUserDto))
                 .isExactlyInstanceOf(UserExistException.class)
                 .hasMessage("Użytkownik taki już istnieje")
                 .hasNoCause();

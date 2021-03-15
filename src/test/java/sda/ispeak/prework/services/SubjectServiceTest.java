@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class SubjectServiceTest {
 
-    private SubjectService sut = new SubjectService();
+    private final SubjectService sut = new SubjectService();
 
     @Test
     void shouldFetchSubjects() {

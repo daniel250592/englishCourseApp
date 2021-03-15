@@ -14,7 +14,6 @@ public class QuestionProfileDto {
     private long id;
 
     private String question;
-    private String questionSubject;
 
 
     private String firstAnswerContent;

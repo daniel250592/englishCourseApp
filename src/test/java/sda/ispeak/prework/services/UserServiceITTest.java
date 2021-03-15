@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
-import sda.ispeak.prework.models.dtos.user.UserDto;
+import sda.ispeak.prework.models.dtos.user.NewUserDto;
 import sda.ispeak.prework.models.dtos.user.UserProfile;
 import sda.ispeak.prework.models.exceptions.UserExistException;
 
@@ -24,31 +24,31 @@ class UserServiceITTest {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    private UserDto userDto;
+    private NewUserDto newUserDto;
 
 
     @BeforeEach
     void returnUser() {
-        this.userDto = new UserDto();
-        this.userDto.setUserName("test");
-        this.userDto.setEmail("test@example.com");
-        this.userDto.setPassword("password");
-        this.userDto.setConfirmedPassword("password");
+        this.newUserDto = new NewUserDto();
+        this.newUserDto.setUserName("testtest");
+        this.newUserDto.setEmail("test@exampletest.com");
+        this.newUserDto.setPassword("password");
+        this.newUserDto.setConfirmedPassword("password");
 
     }
 
     @Test
     void shouldIdNotNull() {
-        UserProfile save = userService.save(userDto);
+        UserProfile save = userService.save(newUserDto);
 
         assertThat(save.getId()).isNotZero();
     }
 
     @Test
     void shouldThrowUserExistException() {
-        userService.save(userDto);
+        userService.save(newUserDto);
 
-        assertThatThrownBy(() -> userService.save(userDto))
+        assertThatThrownBy(() -> userService.save(newUserDto))
                 .isExactlyInstanceOf(UserExistException.class)
                 .hasMessage("Użytkownik taki już istnieje")
                 .hasNoCause();
