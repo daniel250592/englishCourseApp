@@ -24,4 +24,13 @@ public class TopicService {
                 .sorted(Comparator.comparing(Topic::getId)).map(TopicMapper::map)
                 .collect(Collectors.toList());
     }
+
+    public String getContentFromTopic(long id) {
+        return topicRepository.findById(id).orElseThrow().getContent();
+    }
+
+    public Topic getTopicByName(String name) {
+        return topicRepository.findTopicByName(name).orElseThrow();
+        //TODO dodać własny wyjątek
+    }
 }
