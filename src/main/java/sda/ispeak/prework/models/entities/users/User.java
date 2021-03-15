@@ -1,4 +1,4 @@
-package sda.ispeak.prework.models.users;
+package sda.ispeak.prework.models.entities.users;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +17,6 @@ public class User {
     @Id
     @GeneratedValue
     private long id;
-
 
     private String email;
     private String userName;

@@ -1,11 +1,11 @@
-package sda.ispeak.prework.models.questions;
+package sda.ispeak.prework.models.entities.questions;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.ToString;
 
-import javax.persistence.*;
-import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 @ToString
@@ -16,8 +16,6 @@ public class Question {
     @Id
     private long id;
 
-
-
     private String question;
 
     private String firstAnswerContent;
@@ -25,12 +23,10 @@ public class Question {
     private String thirdAnswerContent;
     private String fourthAnswerContent;
 
-
     private boolean firstCorrect = false;
     private boolean secondCorrect = false;
     private boolean thirdCorrect = false;
     private boolean fourthCorrect = false;
-
 
     public Question() {
     }
@@ -51,6 +47,7 @@ public class Question {
     public void setQuestion(String question) {
         this.question = question;
     }
+
     public String getFirstAnswerContent() {
         return firstAnswerContent;
     }

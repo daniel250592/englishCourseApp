@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import sda.ispeak.prework.models.dtos.user.NewUserDto;
-import sda.ispeak.prework.models.users.User;
+import sda.ispeak.prework.models.entities.users.User;
 import sda.ispeak.prework.repositories.QuestionRepository;
 import sda.ispeak.prework.repositories.UserRepository;
 import sda.ispeak.prework.services.UserService;
@@ -43,10 +43,8 @@ public class Runner implements CommandLineRunner {
 
             userService.save(newUserDto);
 
-
         } catch (Exception e) {
             log.error("Nie inicjuje bazy - problem ", e);
         }
-
     }
 }

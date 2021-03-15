@@ -41,5 +41,4 @@ public class EmailSender {
             log.error(e.getMessage());
         }
     }
-
 }

@@ -1,6 +1,5 @@
-package sda.ispeak.prework.models.dtos;
+package sda.ispeak.prework.models.dtos.topic;
 
-import com.sun.istack.NotNull;
 import lombok.Builder;
 
 import javax.validation.constraints.Size;

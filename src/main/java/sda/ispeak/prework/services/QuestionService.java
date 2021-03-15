@@ -1,18 +1,16 @@
 package sda.ispeak.prework.services;
 
 import org.springframework.stereotype.Service;
-import sda.ispeak.prework.models.dtos.NewQuestionDto;
-import sda.ispeak.prework.models.dtos.QuestionProfileDto;
+import sda.ispeak.prework.models.dtos.question.NewQuestionDto;
+import sda.ispeak.prework.models.dtos.question.QuestionProfileDto;
+import sda.ispeak.prework.models.entities.questions.Question;
 import sda.ispeak.prework.models.mappers.QuestionMapper;
-import sda.ispeak.prework.models.questions.Question;
 import sda.ispeak.prework.repositories.QuestionRepository;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-
 public class QuestionService {
 
     private final QuestionRepository questionRepository;
@@ -28,15 +26,10 @@ public class QuestionService {
     }
 
     public List<QuestionProfileDto> getAllQuestions() {
-            return questionRepository.findAll().stream()
-                    .map(QuestionMapper::map)
-                    .collect(Collectors.toList());
+        return questionRepository.findAll().stream()
+                .map(QuestionMapper::map)
+                .collect(Collectors.toList());
     }
-
-    public Object saveQuestionAndReturnId(NewQuestionDto newQuestionDto) {
-        return null;
-    }
-
 
     public Question getQuestionById(long id) {
         return questionRepository.findById(id).orElseThrow();
@@ -53,6 +46,4 @@ public class QuestionService {
         questionRepository.save(delete);
         return delete;
     }
-
-
 }

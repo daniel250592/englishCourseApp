@@ -2,7 +2,7 @@ package sda.ispeak.prework.models.mappers;
 
 import sda.ispeak.prework.models.dtos.user.NewUserDto;
 import sda.ispeak.prework.models.dtos.user.UserProfile;
-import sda.ispeak.prework.models.users.User;
+import sda.ispeak.prework.models.entities.users.User;
 
 public class UserMapper {
 
@@ -24,5 +24,4 @@ public class UserMapper {
                 .isActive(user.isActive())
                 .build();
     }
-
 }

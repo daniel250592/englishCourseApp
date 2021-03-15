@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import sda.ispeak.prework.models.validations.theSamePasswordsVlidator.TheSamePasswordsValidator;
+import sda.ispeak.prework.models.validations.samePasswordsVlidator.SamePasswordsValidator;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -15,9 +15,8 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@TheSamePasswordsValidator
+@SamePasswordsValidator
 public class NewUserDto {
-    //TODO zmienic nazwe
 
     @Email(message = "Zły format e-maila")
     private String email;

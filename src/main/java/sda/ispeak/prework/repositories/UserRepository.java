@@ -1,7 +1,7 @@
 package sda.ispeak.prework.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import sda.ispeak.prework.models.users.User;
+import sda.ispeak.prework.models.entities.users.User;
 
 import java.util.Optional;
 
