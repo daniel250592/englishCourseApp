@@ -10,6 +10,7 @@ import sda.ispeak.prework.models.questions.Question;
 public class QuestionMapper {
     public static Question map(NewQuestionDto newQuestionDto) {
         return Question.builder()
+                .id(newQuestionDto.getId())
                 .question(newQuestionDto.getQuestion())
                 .firstAnswerContent(newQuestionDto.getFirstAnswerContent())
                 .secondAnswerContent(newQuestionDto.getSecondAnswerContent())
@@ -24,6 +25,7 @@ public class QuestionMapper {
 
     public static QuestionProfileDto map(Question question) {
         return QuestionProfileDto.builder()
+                .id(question.getId())
                 .question(question.getQuestion())
                 .firstAnswerContent(question.getFirstAnswerContent())
                 .secondAnswerContent(question.getSecondAnswerContent())
