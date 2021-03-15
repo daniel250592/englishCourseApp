@@ -26,4 +26,9 @@ public class TopicService {
                 .sorted(Comparator.comparing(Topic::getId)).map(TopicMapper::map)
                 .collect(Collectors.toList());
     }
+
+    public String getContentFromTopic(long id) {
+
+        return topicRepository.findById(id).orElseThrow().getContent();
+    }
 }

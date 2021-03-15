@@ -21,4 +21,9 @@ public class TopicController {
         return service.getAllTopics();
     }
 
+    @GetMapping("/get-content/{id}")
+    public String getContentFromTopic(@PathVariable long id) {
+
+        return service.getContentFromTopic(id);
+    }
 }
