@@ -2,6 +2,7 @@ package sda.ispeak.prework.services;
 
 import org.springframework.stereotype.Service;
 import sda.ispeak.prework.models.dtos.TopicProfile;
+import sda.ispeak.prework.models.exceptions.NoSuchTopicExeption;
 import sda.ispeak.prework.models.mappers.TopicMapper;
 import sda.ispeak.prework.models.topic.Topic;
 import sda.ispeak.prework.repositories.TopicRepository;
@@ -29,6 +30,7 @@ public class TopicService {
 
     public String getContentFromTopic(long id) {
 
-        return topicRepository.findById(id).orElseThrow().getContent();
+        return topicRepository.findById(id).orElseThrow(() -> new NoSuchTopicExeption("Brak takiego tematu"))
+                .getContent();
     }
 }
