@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CorrectAnswerValidator {
-    String message() default "Tylko jedna odpowiedź jest poprawna";
+    String message() default "Dokładnie jedna odpowiedź jest poprawna";
 
     Class<?>[] groups() default {};
 

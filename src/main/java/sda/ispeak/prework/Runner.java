@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import sda.ispeak.prework.models.dtos.user.UserDto;
+import sda.ispeak.prework.models.dtos.user.NewUserDto;
 import sda.ispeak.prework.models.users.User;
 import sda.ispeak.prework.repositories.QuestionRepository;
 import sda.ispeak.prework.repositories.UserRepository;
@@ -34,14 +34,14 @@ public class Runner implements CommandLineRunner {
             user.setUserName("example");
             user.setPassword("example");
 
-            UserDto userDto = new UserDto();
+            NewUserDto newUserDto = new NewUserDto();
 
-            userDto.setUserName(user.getUserName());
-            userDto.setEmail(user.getEmail());
-            userDto.setPassword(user.getPassword());
-            userDto.setConfirmedPassword(user.getPassword());
+            newUserDto.setUserName(user.getUserName());
+            newUserDto.setEmail(user.getEmail());
+            newUserDto.setPassword(user.getPassword());
+            newUserDto.setConfirmedPassword(user.getPassword());
 
-            userService.save(userDto);
+            userService.save(newUserDto);
 
 
         } catch (Exception e) {
