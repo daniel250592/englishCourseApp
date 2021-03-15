@@ -17,8 +17,6 @@ public class Topic {
     private String name;
     private String content;
 
-    @OneToOne
-    private Quiz quiz;
 
     @OneToMany
     private Set<User> users;
@@ -31,11 +29,10 @@ public class Topic {
         this.name = name;
     }
 
-    public Topic(long id, String name, String content, Quiz quiz, Set<User> users) {
+    public Topic(long id, String name, String content, Set<User> users) {
         this.id = id;
         this.name = name;
         this.content = content;
-        this.quiz = quiz;
         this.users = users;
     }
 
@@ -47,13 +44,6 @@ public class Topic {
         this.id = id;
     }
 
-    public Quiz getQuiz() {
-        return quiz;
-    }
-
-    public void setQuiz(Quiz quiz) {
-        this.quiz = quiz;
-    }
 
     public String getName() {
         return name;
@@ -86,7 +76,6 @@ public class Topic {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", content='" + content + '\'' +
-                ", quiz=" + quiz +
                 ", users=" + users +
                 '}';
     }

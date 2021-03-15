@@ -1,7 +1,7 @@
 package sda.ispeak.prework.services;
 
 import org.springframework.stereotype.Service;
-import sda.ispeak.prework.models.dtos.TopicDto;
+import sda.ispeak.prework.models.dtos.TopicToListDto;
 import sda.ispeak.prework.models.mappers.TopicMapper;
 import sda.ispeak.prework.models.topic.Topic;
 import sda.ispeak.prework.repositories.TopicRepository;
@@ -20,7 +20,7 @@ public class TopicService {
     }
 
 
-    public List<TopicDto> getAllTopics(){
+    public List<TopicToListDto> getAllTopics(){
         return topicRepository.findAll().stream()
                 .sorted(Comparator.comparing(Topic::getId)).map(TopicMapper::mapToTopicList)
                 .collect(Collectors.toList());

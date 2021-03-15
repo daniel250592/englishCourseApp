@@ -2,23 +2,16 @@ package sda.ispeak.prework;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import sda.ispeak.prework.models.dtos.TopicDto;
-import sda.ispeak.prework.models.mappers.TopicMapper;
 import sda.ispeak.prework.models.dtos.user.NewUserDto;
 import sda.ispeak.prework.models.questions.Answer;
 import sda.ispeak.prework.models.questions.Question;
 import sda.ispeak.prework.models.questions.QuestionSubject;
-import sda.ispeak.prework.models.topic.Quiz;
-import sda.ispeak.prework.models.topic.Topic;
 import sda.ispeak.prework.models.users.User;
 import sda.ispeak.prework.repositories.AnswerRepository;
 import sda.ispeak.prework.repositories.QuestionRepository;
-import sda.ispeak.prework.repositories.TopicRepository;
 import sda.ispeak.prework.repositories.UserRepository;
-import sda.ispeak.prework.services.TopicService;
 import sda.ispeak.prework.services.UserService;
 
 import java.util.HashSet;

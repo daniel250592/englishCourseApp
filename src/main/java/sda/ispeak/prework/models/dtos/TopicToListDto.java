@@ -6,12 +6,11 @@ import lombok.Builder;
 import javax.validation.constraints.Size;
 
 @Builder
-public class TopicDto {
+public class TopicToListDto {
 
-    @NotNull
+
     private long id;
 
-    @NotNull
     @Size(min = 2, max = 100, message = "Temat musi zawierać minimalnie 2 znaki, maksymalnie 50 znaków")
     private String name;
 
