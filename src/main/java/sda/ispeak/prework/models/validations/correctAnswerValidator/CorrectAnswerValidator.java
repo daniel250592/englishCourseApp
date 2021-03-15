@@ -1,7 +1,5 @@
 package sda.ispeak.prework.models.validations.correctAnswerValidator;
 
-import sda.ispeak.prework.models.validations.theSamePasswordsVlidator.TheSamePasswordsValidatorImpl;
-
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.ElementType;
@@ -13,7 +11,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CorrectAnswerValidator {
-    String message() default "Dokładnie jedna odpowiedź jest poprawna";
+    String message() default "Dokładnie jedna odpowiedź powinna być poprawna";
 
     Class<?>[] groups() default {};
 

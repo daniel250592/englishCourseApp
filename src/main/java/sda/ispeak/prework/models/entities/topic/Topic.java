@@ -1,13 +1,14 @@
-package sda.ispeak.prework.models.topic;
+package sda.ispeak.prework.models.entities.topic;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import sda.ispeak.prework.models.questions.Question;
-import sda.ispeak.prework.models.users.User;
+import sda.ispeak.prework.models.entities.users.User;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -23,7 +24,6 @@ public class Topic {
     private String name;
     private String content;
 
-
     @OneToMany
     private Set<User> users;
 
@@ -35,7 +35,6 @@ public class Topic {
     public void setId(long id) {
         this.id = id;
     }
-
 
     public String getName() {
         return name;
@@ -53,7 +52,6 @@ public class Topic {
         this.content = content;
     }
 
-
     public Set<User> getUsers() {
         return users;
     }
@@ -61,5 +59,4 @@ public class Topic {
     public void setUsers(Set<User> users) {
         this.users = users;
     }
-
 }

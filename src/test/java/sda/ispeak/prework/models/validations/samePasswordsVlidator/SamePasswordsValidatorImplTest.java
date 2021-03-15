@@ -1,4 +1,4 @@
-package sda.ispeak.prework.models.validations.theSamePasswordsVlidator;
+package sda.ispeak.prework.models.validations.samePasswordsVlidator;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,12 +11,12 @@ import javax.validation.ConstraintValidatorContext;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
-class TheSamePasswordsValidatorImplTest {
+class SamePasswordsValidatorImplTest {
 
     @Mock
     private ConstraintValidatorContext constraintValidatorContext;
 
-    private final TheSamePasswordsValidatorImpl theSamePasswordsValidator = new TheSamePasswordsValidatorImpl();
+    private final SamePasswordsValidatorImpl theSamePasswordsValidator = new SamePasswordsValidatorImpl();
 
     @Test
     void shouldAssertTrue() {

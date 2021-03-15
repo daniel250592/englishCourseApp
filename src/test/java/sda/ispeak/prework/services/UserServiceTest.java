@@ -11,9 +11,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import sda.ispeak.prework.models.dtos.user.NewUserDto;
 import sda.ispeak.prework.models.dtos.user.UserProfile;
 import sda.ispeak.prework.models.emails.EmailSender;
-import sda.ispeak.prework.models.exceptions.NoSuchUserException;
-import sda.ispeak.prework.models.exceptions.UserExistException;
-import sda.ispeak.prework.models.users.User;
+import sda.ispeak.prework.models.exceptions.userExceptions.NoSuchUserException;
+import sda.ispeak.prework.models.exceptions.userExceptions.UserExistException;
+import sda.ispeak.prework.models.entities.users.User;
 import sda.ispeak.prework.repositories.UserRepository;
 
 import java.util.Optional;

@@ -1,11 +1,9 @@
 package sda.ispeak.prework.models.mappers;
 
 
-
-import sda.ispeak.prework.models.dtos.NewQuestionDto;
-import sda.ispeak.prework.models.dtos.QuestionProfileDto;
-import sda.ispeak.prework.models.questions.Question;
-
+import sda.ispeak.prework.models.dtos.question.NewQuestionDto;
+import sda.ispeak.prework.models.dtos.question.QuestionProfileDto;
+import sda.ispeak.prework.models.entities.questions.Question;
 
 public class QuestionMapper {
     public static Question map(NewQuestionDto newQuestionDto) {
@@ -37,7 +35,4 @@ public class QuestionMapper {
                 .fourthCorrect(question.isFourthCorrect())
                 .build();
     }
-
-
-
 }

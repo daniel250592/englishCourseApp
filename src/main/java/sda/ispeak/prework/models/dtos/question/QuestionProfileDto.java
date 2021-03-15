@@ -1,52 +1,29 @@
-package sda.ispeak.prework.models.dtos;
+package sda.ispeak.prework.models.dtos.question;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.ToString;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
 @ToString
 @Builder
 @AllArgsConstructor
-public class NewQuestionDto {
+public class QuestionProfileDto {
 
-    @Min(message = "Wpisz id", value = 0L)
     private long id;
 
-    @NotBlank(message = "Wpisz pytanie")
-    @NotNull(message = "Wpisz pytanie")
-    @Size(min = 10, max = 200, message = "Twoje pytanie nie spełnia standardów")
     private String question;
 
-    @NotBlank(message = "Wpisz odpowiedź pierwszą")
-    @NotNull(message = "Wpisz odpowiedź pierwszą")
-    @Size(min = 1, max = 100, message = "Podana odpowiedź nie spełnia standardów")
     private String firstAnswerContent;
-    @NotBlank(message = "Wpisz odpowiedź drugą")
-    @NotNull(message = "Wpisz odpowiedź drugą")
-    @Size(min = 1, max = 100, message = "Podana odpowiedź nie spełnia standardów")
     private String secondAnswerContent;
-    @NotBlank(message = "Wpisz odpowiedź trzecią")
-    @NotNull(message = "Wpisz odpowiedź trzecią")
-    @Size(min = 1, max = 100, message = "Podana odpowiedź nie spełnia standardów")
     private String thirdAnswerContent;
-    @NotBlank(message = "Wpisz odpowiedź czwartą")
-    @NotNull(message = "Wpisz odpowiedź czwartą")
-    @Size(min = 1, max = 100, message = "Podana odpowiedź nie spełnia standardów")
     private String fourthAnswerContent;
-
 
     private boolean firstCorrect = false;
     private boolean secondCorrect = false;
     private boolean thirdCorrect = false;
     private boolean fourthCorrect = false;
 
-
-    public NewQuestionDto() {
+    public QuestionProfileDto() {
     }
 
     public long getId() {

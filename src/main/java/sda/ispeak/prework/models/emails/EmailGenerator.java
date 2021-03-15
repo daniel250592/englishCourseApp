@@ -1,6 +1,6 @@
 package sda.ispeak.prework.models.emails;
 
-import sda.ispeak.prework.models.users.User;
+import sda.ispeak.prework.models.entities.users.User;
 
 public class EmailGenerator {
 
@@ -11,8 +11,6 @@ public class EmailGenerator {
                 .message("Cieszymy się, że jestes z nami!!! \n Aktywuj swoje konto klikając w link: http://localhost:8080/user/activate-account/" + user.getId() +
                         "\n I ciesz się nauką :)")
                 .build();
-
-
     }
 
 }

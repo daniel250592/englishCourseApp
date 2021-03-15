@@ -1,4 +1,4 @@
-package sda.ispeak.prework.models.exceptions;
+package sda.ispeak.prework.models.exceptions.userExceptions;
 
 public class IspeakException extends RuntimeException {
 
@@ -6,8 +6,4 @@ public class IspeakException extends RuntimeException {
         super(message);
     }
 
-    @Override
-    public String getMessage() {
-        return super.getMessage();
-    }
 }
