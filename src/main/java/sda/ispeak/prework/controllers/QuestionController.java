@@ -4,6 +4,7 @@ package sda.ispeak.prework.controllers;
 import org.springframework.web.bind.annotation.*;
 import sda.ispeak.prework.models.dtos.question.NewQuestionDto;
 import sda.ispeak.prework.models.dtos.question.QuestionProfileDto;
+import sda.ispeak.prework.models.validations.correctAnswerValidator.CorrectAnswerValidatorImpl;
 import sda.ispeak.prework.services.QuestionService;
 
 import javax.validation.Valid;
@@ -14,9 +15,11 @@ import java.util.List;
 public class QuestionController {
 
     private final QuestionService questionService;
+    private final CorrectAnswerValidatorImpl correctAnswerValidator;
 
-    public QuestionController(QuestionService questionService) {
+    public QuestionController(QuestionService questionService, CorrectAnswerValidatorImpl correctAnswerValidator) {
         this.questionService = questionService;
+        this.correctAnswerValidator = correctAnswerValidator;
     }
 
     @PostMapping("/add-new-question")
@@ -30,5 +33,10 @@ public class QuestionController {
 
     }
 
+    @RequestMapping(value = "/getQuestionProfileDto/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public QuestionProfileDto getQuestionByID(@PathVariable long id) {
+        return questionService.getQuestionById(id);
+    }
 
 }

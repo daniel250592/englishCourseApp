@@ -31,12 +31,12 @@ public class QuestionService {
                 .collect(Collectors.toList());
     }
 
-    public Question getQuestionById(long id) {
+    public Question getQuestionByIdIfExists(long id) {
         return questionRepository.findById(id).orElseThrow();
     }
 
     public Question delete(long id) {
-        Question questionById = getQuestionById(id);
+        Question questionById = getQuestionByIdIfExists(id);
         questionRepository.delete(questionById);
         return questionById;
     }
@@ -46,4 +46,11 @@ public class QuestionService {
         questionRepository.save(delete);
         return delete;
     }
+
+    public QuestionProfileDto getQuestionById(long id) {
+        Question question = questionRepository.findById(id).orElseThrow();
+        QuestionProfileDto questionProfileDto = QuestionMapper.map(question);
+        return questionProfileDto;
+    }
+
 }
