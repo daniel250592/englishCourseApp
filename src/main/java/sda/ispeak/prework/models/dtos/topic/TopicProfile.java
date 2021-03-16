@@ -1,4 +1,4 @@
-package sda.ispeak.prework.models.dtos;
+package sda.ispeak.prework.models.dtos.topic;
 
 import com.sun.istack.NotNull;
 import lombok.Builder;
@@ -11,7 +11,6 @@ public class TopicProfile {
 
     private long id;
 
-    @Size(min = 2, max = 100, message = "Temat musi zawierać minimalnie 2 znaki, maksymalnie 50 znaków")
     private String name;
 
     public long getId() {
