@@ -10,10 +10,9 @@ import java.util.Set;
 
 @Entity
 @Builder
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
-@Getter
-@Setter
+@AllArgsConstructor
 public class Quiz {
 
     @Id

@@ -5,10 +5,9 @@ import sda.ispeak.prework.models.dtos.user.UserProfile;
 import sda.ispeak.prework.models.entities.quiz.Quiz;
 
 @Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 public class UserPointsProfile {
 
     private long id;

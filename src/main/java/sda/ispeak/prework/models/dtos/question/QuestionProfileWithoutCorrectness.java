@@ -2,12 +2,10 @@ package sda.ispeak.prework.models.dtos.question;
 
 import lombok.*;
 
-@ToString
 @Builder
-@AllArgsConstructor
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class QuestionProfileWithoutCorrectness {
 
     private long id;

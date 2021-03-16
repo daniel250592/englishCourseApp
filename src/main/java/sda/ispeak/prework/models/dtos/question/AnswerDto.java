@@ -6,12 +6,10 @@ import lombok.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
-@ToString
 @Builder
-@AllArgsConstructor
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class AnswerDto {
 
     @NotNull
@@ -21,3 +19,5 @@ public class AnswerDto {
     @Min(value = 0)
     private long questionId;
 }
+
+

@@ -16,7 +16,6 @@ public class UserPoints {
 
     @Id
     private long id;
-    //ID zawsze takie jak ID usera który robi dany quiz
 
     @ManyToOne
     private Quiz quiz;
