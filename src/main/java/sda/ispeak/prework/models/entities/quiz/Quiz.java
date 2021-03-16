@@ -1,7 +1,6 @@
 package sda.ispeak.prework.models.entities.quiz;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import lombok.*;
 import sda.ispeak.prework.models.entities.questions.Question;
 import sda.ispeak.prework.models.entities.topic.Topic;
 import sda.ispeak.prework.models.entities.users.User;
@@ -12,10 +11,12 @@ import java.util.Set;
 @Entity
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Quiz {
 
     @Id
-    @GeneratedValue
     private long id;
 
     @OneToOne
@@ -26,16 +27,5 @@ public class Quiz {
 
     @OneToMany
     private Set<User> users;
-
-    public Quiz() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
 }

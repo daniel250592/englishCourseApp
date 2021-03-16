@@ -1,6 +1,8 @@
 package sda.ispeak.prework.services;
 
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+import sda.ispeak.prework.models.dtos.topic.NewTopicDto;
 import sda.ispeak.prework.models.dtos.topic.TopicProfile;
 import sda.ispeak.prework.models.entities.topic.Topic;
 import sda.ispeak.prework.models.mappers.TopicMapper;
@@ -14,9 +16,11 @@ import java.util.stream.Collectors;
 public class TopicService {
 
     private final TopicRepository topicRepository;
+    private final QuizService quizService;
 
-    public TopicService(TopicRepository topicRepository) {
+    public TopicService(TopicRepository topicRepository,@Lazy QuizService quizService) {
         this.topicRepository = topicRepository;
+        this.quizService = quizService;
     }
 
     public List<TopicProfile> getAllTopics() {
@@ -32,5 +36,15 @@ public class TopicService {
     public Topic getTopicByName(String name) {
         return topicRepository.findTopicByName(name).orElseThrow();
         //TODO dodać własny wyjątek
+    }
+
+    public TopicProfile addNewTopic(NewTopicDto newTopicDto) {
+        Topic topic = topicRepository.save(TopicMapper.map(newTopicDto));
+        quizService.createNewQuizToTopic(topic.getId());
+        return TopicMapper.map(topic);
+    }
+
+    public Topic findById(long id) {
+        return topicRepository.findById(id).orElseThrow();
     }
 }

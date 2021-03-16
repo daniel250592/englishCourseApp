@@ -1,10 +1,8 @@
 package sda.ispeak.prework.controllers;
 
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import sda.ispeak.prework.models.dtos.topic.NewTopicDto;
 import sda.ispeak.prework.models.dtos.topic.TopicProfile;
 import sda.ispeak.prework.services.TopicService;
 
@@ -23,11 +21,14 @@ public class TopicController {
         return service.getAllTopics();
     }
 
-    //TODO w momencie jak Ola bedzie tworzyła nowy topic to bede tworzył nowy quiz a pytania będą dodawane do odpowiedniego quizu przez admina
-
     @GetMapping("/get-content/{id}")
     public String getContentFromTopic(@PathVariable long id) {
         return service.getContentFromTopic(id);
+    }
+
+    @PostMapping("/new-topic")
+    public TopicProfile addNewTopic(@RequestBody NewTopicDto newTopicDto){
+        return service.addNewTopic(newTopicDto);
     }
 
 }

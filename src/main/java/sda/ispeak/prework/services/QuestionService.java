@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import sda.ispeak.prework.models.dtos.question.NewQuestionDto;
 import sda.ispeak.prework.models.dtos.question.QuestionProfileDto;
 import sda.ispeak.prework.models.entities.questions.Question;
+import sda.ispeak.prework.models.entities.quiz.Quiz;
 import sda.ispeak.prework.models.mappers.QuestionMapper;
 import sda.ispeak.prework.repositories.QuestionRepository;
 
@@ -47,4 +48,7 @@ public class QuestionService {
         return delete;
     }
 
+    public Quiz findQuizById(long quizId) {
+        return new Quiz();
+    }
 }
