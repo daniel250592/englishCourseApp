@@ -15,11 +15,9 @@ import java.util.List;
 public class QuestionController {
 
     private final QuestionService questionService;
-    private final CorrectAnswerValidatorImpl correctAnswerValidator;
 
-    public QuestionController(QuestionService questionService, CorrectAnswerValidatorImpl correctAnswerValidator) {
+    public QuestionController(QuestionService questionService) {
         this.questionService = questionService;
-        this.correctAnswerValidator = correctAnswerValidator;
     }
 
     @PostMapping("/add-new-question")
