@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import sda.ispeak.prework.models.dtos.topic.NewTopicDto;
 import sda.ispeak.prework.models.dtos.topic.TopicProfile;
+import sda.ispeak.prework.models.dtos.topic.TopicToListDto;
 import sda.ispeak.prework.models.topic.Topic;
 import sda.ispeak.prework.services.TopicService;
 
@@ -21,8 +22,18 @@ public class TopicController {
         return service.save(newTopicDto);
     }
 
+    @PutMapping("/update-topic-name/{id}")
+    public Topic updateTopicName(@RequestBody TopicProfile topicProfile, @PathVariable long id) {
+        return service.updateTopicName(id, topicProfile);
+    }
+
+    @PutMapping("/update-topic-content/{id}")
+    public Topic updateTopicContent(@RequestBody TopicProfile topicProfile, @PathVariable long id) {
+        return service.updateTopicContent(id, topicProfile);
+    }
+
     @GetMapping()
-    public List<TopicProfile> getAllTopics() {
+    public List<TopicToListDto> getAllTopics() {
 
         return service.getAllTopics();
     }

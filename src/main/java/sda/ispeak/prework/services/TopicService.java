@@ -3,6 +3,7 @@ package sda.ispeak.prework.services;
 import org.springframework.stereotype.Service;
 import sda.ispeak.prework.models.dtos.topic.NewTopicDto;
 import sda.ispeak.prework.models.dtos.topic.TopicProfile;
+import sda.ispeak.prework.models.dtos.topic.TopicToListDto;
 import sda.ispeak.prework.models.exceptions.NoSuchTopicExeption;
 import sda.ispeak.prework.models.mappers.TopicMapper;
 import sda.ispeak.prework.models.topic.Topic;
@@ -22,7 +23,7 @@ public class TopicService {
     }
 
 
-    public List<TopicProfile> getAllTopics(){
+    public List<TopicToListDto> getAllTopics() {
         return topicRepository.findAll().stream()
                 .sorted(Comparator.comparing(Topic::getId)).map(TopicMapper::map)
                 .collect(Collectors.toList());
@@ -37,5 +38,21 @@ public class TopicService {
     public Topic save(NewTopicDto newTopicDto) {
         Topic topic = TopicMapper.map(newTopicDto);
         return topicRepository.save(topic);
+    }
+
+    public Topic updateTopicName(long id, TopicProfile topicProfile) {
+        Topic topic = topicRepository
+                .findById(id)
+                .orElseThrow(() -> new NoSuchTopicExeption("Brak takiego tematu"));
+        topic.setName(topicProfile.getName());
+        return topic;
+    }
+
+    public Topic updateTopicContent(long id, TopicProfile topicProfile) {
+        Topic topic = topicRepository
+                .findById(id)
+                .orElseThrow(() -> new NoSuchTopicExeption("Brak takiego tematu"));
+        topic.setContent(topicProfile.getContent());
+        return topic;
     }
 }
