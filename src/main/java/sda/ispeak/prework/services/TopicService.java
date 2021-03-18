@@ -10,6 +10,7 @@ import sda.ispeak.prework.repositories.TopicRepository;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,10 +34,7 @@ public class TopicService {
         return topicRepository.findById(id).orElseThrow().getContent();
     }
 
-    public Topic getTopicByName(String name) {
-        return topicRepository.findTopicByName(name).orElseThrow();
-        //TODO dodać własny wyjątek
-    }
+
 
     public TopicProfile addNewTopic(NewTopicDto newTopicDto) {
         Topic topic = topicRepository.save(TopicMapper.map(newTopicDto));
@@ -45,6 +43,7 @@ public class TopicService {
     }
 
     public Topic findById(long id) {
-        return topicRepository.findById(id).orElseThrow();
+        return topicRepository.findById(id).orElseThrow(()-> new NoSuchElementException("Brak Tematu o podanym ID"));
+        //TODO zrobić swój wyjątek
     }
 }

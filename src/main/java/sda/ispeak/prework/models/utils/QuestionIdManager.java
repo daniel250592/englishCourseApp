@@ -5,7 +5,6 @@ import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.PriorityQueue;
 import java.util.Queue;
 
 @Component()
@@ -28,7 +27,8 @@ public class QuestionIdManager {
     public boolean isEmpty() {
         return isEmpty;
     }
-    public Long peekNextId(){
+
+    public Long peekNextId() {
         return idQueue.peek();
     }
 

@@ -42,14 +42,14 @@ public class QuizService {
         return quizRepository.findQuestionsByQuizId(quizId);
     }
 
-    private List<Long> getQuestionsIdsFromGivenTopic(String topic) {
-        long id = topicService.getTopicByName(topic).getId();
-        return getQuestionsIdsFromGivenQuiz(id);
+    private List<Long> getQuestionsIdsFromGivenTopic(long topicId) {
+        topicService.findById(topicId);
+        return getQuestionsIdsFromGivenQuiz(topicId);
     }
 
-    public QuestionProfileDto getQuestionFromGivenQuiz(String topic) {
+    public QuestionProfileDto getQuestionFromGivenQuiz(long topicId) {
         if (questionIdManager.isEmpty()) {
-            List<Long> questionsIdsFromGivenTopic = getQuestionsIdsFromGivenTopic(topic);
+            List<Long> questionsIdsFromGivenTopic = getQuestionsIdsFromGivenTopic(topicId);
             questionIdManager.addValuesToQueue(questionsIdsFromGivenTopic);
         }
         if (questionIdManager.peekNextId() != null) {
@@ -57,6 +57,7 @@ public class QuizService {
         } else {
             throw new NoSuchElementException("Quiz zakończony");
             //TODO zrobić swój wyjątek
+            //TODO można zrobic endpoint zacznij quiz od nowa
         }
 
     }

@@ -21,9 +21,9 @@ public class QuizController {
         this.quizService = quizService;
     }
 
-    @GetMapping("/{topic}/questions-list")
-    public QuestionProfileDto getQuestionsIdsFromGivenTopic(String topic) {
-        return quizService.getQuestionFromGivenQuiz(topic);
+    @GetMapping("/{topicId}/questions-list")
+    public QuestionProfileDto getQuestionsIdsFromGivenTopic(@PathVariable long topicId) {
+        return quizService.getQuestionFromGivenQuiz(topicId);
     }
 
     @GetMapping("/question/{id}")
