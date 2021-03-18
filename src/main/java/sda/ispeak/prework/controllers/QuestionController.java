@@ -31,7 +31,7 @@ public class QuestionController {
     }
 
     @GetMapping("question/{id}")
-    public Question getquestionById(@PathVariable long id) {
+    public Question getQuestionById(@PathVariable long id) {
         return questionService.getQuestionById(id);
     }
 

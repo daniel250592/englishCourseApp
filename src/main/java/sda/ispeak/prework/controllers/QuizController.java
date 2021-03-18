@@ -2,6 +2,7 @@ package sda.ispeak.prework.controllers;
 
 import org.springframework.web.bind.annotation.*;
 import sda.ispeak.prework.models.dtos.question.AnswerDto;
+import sda.ispeak.prework.models.dtos.question.QuestionProfileDto;
 import sda.ispeak.prework.models.dtos.question.QuestionProfileWithoutCorrectness;
 import sda.ispeak.prework.models.dtos.userPoints.UserPointsProfile;
 import sda.ispeak.prework.models.entities.userPoints.UserPoints;
@@ -21,8 +22,8 @@ public class QuizController {
     }
 
     @GetMapping("/{topic}/questions-list")
-    public List<Long> getQuestionsIdsFromGivenTopic(String topic) {
-        return quizService.getQuestionsIdsFromGivenTopic(topic);
+    public QuestionProfileDto getQuestionsIdsFromGivenTopic(String topic) {
+        return quizService.getQuestionFromGivenQuiz(topic);
     }
 
     @GetMapping("/question/{id}")

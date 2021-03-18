@@ -3,6 +3,7 @@ package sda.ispeak.prework.services;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import sda.ispeak.prework.models.dtos.question.AnswerDto;
+import sda.ispeak.prework.models.dtos.question.QuestionProfileDto;
 import sda.ispeak.prework.models.dtos.question.QuestionProfileWithoutCorrectness;
 import sda.ispeak.prework.models.dtos.userPoints.UserPointsProfile;
 import sda.ispeak.prework.models.entities.questions.Question;
@@ -10,6 +11,7 @@ import sda.ispeak.prework.models.entities.quiz.Quiz;
 import sda.ispeak.prework.models.entities.userPoints.UserPoints;
 import sda.ispeak.prework.models.mappers.QuestionMapper;
 import sda.ispeak.prework.models.mappers.UserPointsMapper;
+import sda.ispeak.prework.models.utils.QuestionIdManager;
 import sda.ispeak.prework.repositories.QuizRepository;
 import sda.ispeak.prework.repositories.UserPointsRepository;
 
@@ -24,24 +26,41 @@ public class QuizService {
     private final QuizRepository quizRepository;
     private final UserPointsRepository userPointsRepository;
     private final UserService userService;
+    private final QuestionIdManager questionIdManager;
 
 
-    public QuizService(QuestionService questionService, @Lazy TopicService topicService, QuizRepository quizRepository, UserPointsRepository userPointsRepository, UserService userService) {
+    public QuizService(QuestionService questionService, @Lazy TopicService topicService, QuizRepository quizRepository, UserPointsRepository userPointsRepository, UserService userService, QuestionIdManager questionIdManager) {
         this.questionService = questionService;
         this.topicService = topicService;
         this.quizRepository = quizRepository;
         this.userPointsRepository = userPointsRepository;
         this.userService = userService;
+        this.questionIdManager = questionIdManager;
     }
 
     private List<Long> getQuestionsIdsFromGivenQuiz(long quizId) {
         return quizRepository.findQuestionsByQuizId(quizId);
     }
 
-    public List<Long> getQuestionsIdsFromGivenTopic(String topic) {
+    private List<Long> getQuestionsIdsFromGivenTopic(String topic) {
         long id = topicService.getTopicByName(topic).getId();
         return getQuestionsIdsFromGivenQuiz(id);
     }
+
+    public QuestionProfileDto getQuestionFromGivenQuiz(String topic) {
+        if (questionIdManager.isEmpty()) {
+            List<Long> questionsIdsFromGivenTopic = getQuestionsIdsFromGivenTopic(topic);
+            questionIdManager.addValuesToQueue(questionsIdsFromGivenTopic);
+        }
+        if (questionIdManager.peekNextId() != null) {
+            return  QuestionMapper.map(questionService.getQuestionById(questionIdManager.pollNextId()));
+        } else {
+            throw new NoSuchElementException("Quiz zakończony");
+            //TODO zrobić swój wyjątek
+        }
+
+    }
+
 
     public QuestionProfileWithoutCorrectness getQuestionById(long id) {
         return QuestionMapper.mapAndReturnQuestionProfileWithoutCorrectness(questionService.getQuestionById(id));

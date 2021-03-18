@@ -48,7 +48,4 @@ public class QuestionService {
         return delete;
     }
 
-    public Quiz findQuizById(long quizId) {
-        return new Quiz();
-    }
 }
