@@ -75,7 +75,7 @@ UI: po poprawnym zalogowaniu użytkownik powinien zostać przekierowany na stron
 #### Prezentacja tematów
 Istnieje endpoint, który przekaże listę wszystki dostępnych tematów w określonej konfiguracji.
 Lista taka jest prezentowana w UI zarejestrowanemu użytkownikowi.
-Jeżeli w systmie nie ma jeszcze żadnych tematów, endpoint zwróci pustą listę.
+Jeżeli w systemie nie ma jeszcze żadnych tematów, endpoint zwróci pustą listę.
 Endpoint ma być dostępny jedynie dla zarejestrowanych użytkowników.
 
 #### Prezentacja zawartości wybranego tematu.
@@ -89,9 +89,11 @@ Zarejestrowany użytkownik po wybraniu tematu może aktywować quiz dostępny dl
 Po aktywowaniu quizu system pokazuje zawsze pierwsze pytanie quizu, nawet jeżeli wcześniej quiz był już wykonany.
 Użytkownik musi zaznaczyć jedną z odpowiedzi zanim przejdzie do kolejnego pytania. Po zaznaczeniu odpowiedzi aktywuje akcję dalej.
 Istnieje kilka endpointów w systemie:
-- pierwszy wyświetla pierwsze pytanie w quizie na bazie wybranego tematu oraz numer kolejnego pytania. Jeżeli kolejnego pytania nie ma w systemie to podaje w numerze wartość -100.
-- drugi rejestruje odpowiedź i wyświetla wyświetla kolejne w oparciu o podany numerze. Jeżeli kolejnego pytania nie ma w systemie to podaje w numerze wartość -100.
-- trzeci prezentuje wynik całego quizu. 
+- pierwszy zwraca listę z ID pytań należących do danego tematu, Front end przetrzymuję lisę i wykonuję zapytanie na endpoint po konkretne pytanie.
+- Następnie istnieje endpoint który przyjmie wybraną odpowiedz oraz ID pytania i zwróci czy wybrana odpowiedz jest poprawna 
+- Front End liczy zdobyte punkty i po skonczonym Quizie 
+  przesyła wynik na przygotowany endpoint zapisujący na bazie danych wynik, wynik poprzedniego jest nadpisywany
+
 Za wywołanie odpowiednich endpointów odpowiada UI.
 Endpointy mają być dostępne jedynie dla zarejestrowanych użytkowników.
   
