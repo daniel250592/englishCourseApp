@@ -3,8 +3,10 @@ package sda.ispeak.prework.services;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import sda.ispeak.prework.models.dtos.topic.NewTopicDto;
-import sda.ispeak.prework.models.dtos.topic.TopicProfile;
+import sda.ispeak.prework.models.dtos.topic.TopicDto;
+import sda.ispeak.prework.models.dtos.topic.TopicToListDto;
 import sda.ispeak.prework.models.entities.topic.Topic;
+import sda.ispeak.prework.models.exceptions.NoSuchTopicExeption;
 import sda.ispeak.prework.models.mappers.TopicMapper;
 import sda.ispeak.prework.repositories.TopicRepository;
 
@@ -24,26 +26,39 @@ public class TopicService {
         this.quizService = quizService;
     }
 
-    public List<TopicProfile> getAllTopics() {
+
+    public List<TopicToListDto> getAllTopics() {
         return topicRepository.findAll().stream()
                 .sorted(Comparator.comparing(Topic::getId)).map(TopicMapper::map)
                 .collect(Collectors.toList());
     }
 
     public String getContentFromTopic(long id) {
-        return topicRepository.findById(id).orElseThrow().getContent();
+
+        return topicRepository.findById(id).orElseThrow(() -> new NoSuchTopicExeption("Brak takiego tematu"))
+                .getContent();
     }
 
-
-
-    public TopicProfile addNewTopic(NewTopicDto newTopicDto) {
-        Topic topic = topicRepository.save(TopicMapper.map(newTopicDto));
+    public TopicDto save(NewTopicDto newTopicDto) {
+        Topic topic = TopicMapper.map(newTopicDto);
+        topic = topicRepository.save(topic);
         quizService.createNewQuizToTopic(topic.getId());
-        return TopicMapper.map(topic);
+        return TopicMapper.mapToDto(topic);
+    }
+
+    public TopicDto updateTopic(long id, NewTopicDto topicDto) {
+        Topic topic = topicRepository
+                .findById(id)
+                .orElseThrow(() -> new NoSuchTopicExeption("Brak takiego tematu"));
+        topic.setName(topicDto.getName());
+        topic.setContent(topicDto.getContent());
+        topicRepository.save(topic);
+        return TopicMapper.mapToDto(topic);
     }
 
     public Topic findById(long id) {
         return topicRepository.findById(id).orElseThrow(()-> new NoSuchElementException("Brak Tematu o podanym ID"));
         //TODO zrobić swój wyjątek
     }
+
 }
