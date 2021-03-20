@@ -6,7 +6,7 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class QuestionProfileDto {
+public class QuestionProfileWithoutCorrectness {
 
     private long id;
 
@@ -16,10 +16,4 @@ public class QuestionProfileDto {
     private String secondAnswerContent;
     private String thirdAnswerContent;
     private String fourthAnswerContent;
-
-    private boolean firstCorrect = false;
-    private boolean secondCorrect = false;
-    private boolean thirdCorrect = false;
-    private boolean fourthCorrect = false;
-
 }

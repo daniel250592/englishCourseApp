@@ -1,5 +1,6 @@
 package sda.ispeak.prework.services;
 
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import sda.ispeak.prework.models.dtos.topic.NewTopicDto;
 import sda.ispeak.prework.models.dtos.topic.TopicDto;
@@ -11,15 +12,18 @@ import sda.ispeak.prework.repositories.TopicRepository;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
 public class TopicService {
 
     private final TopicRepository topicRepository;
+    private final QuizService quizService;
 
-    public TopicService(TopicRepository topicRepository) {
+    public TopicService(TopicRepository topicRepository,@Lazy QuizService quizService) {
         this.topicRepository = topicRepository;
+        this.quizService = quizService;
     }
 
 
@@ -38,6 +42,7 @@ public class TopicService {
     public TopicDto save(NewTopicDto newTopicDto) {
         Topic topic = TopicMapper.map(newTopicDto);
         topic = topicRepository.save(topic);
+        quizService.createNewQuizToTopic(topic.getId());
         return TopicMapper.mapToDto(topic);
     }
 
@@ -49,6 +54,11 @@ public class TopicService {
         topic.setContent(topicDto.getContent());
         topicRepository.save(topic);
         return TopicMapper.mapToDto(topic);
+    }
+
+    public Topic findById(long id) {
+        return topicRepository.findById(id).orElseThrow(()-> new NoSuchElementException("Brak Tematu o podanym ID"));
+        //TODO zrobić swój wyjątek
     }
 
 }

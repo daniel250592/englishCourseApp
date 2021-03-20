@@ -3,6 +3,7 @@ package sda.ispeak.prework.models.mappers;
 
 import sda.ispeak.prework.models.dtos.question.NewQuestionDto;
 import sda.ispeak.prework.models.dtos.question.QuestionProfileDto;
+import sda.ispeak.prework.models.dtos.question.QuestionProfileWithoutCorrectness;
 import sda.ispeak.prework.models.entities.questions.Question;
 
 public class QuestionMapper {
@@ -33,6 +34,17 @@ public class QuestionMapper {
                 .secondCorrect(question.isSecondCorrect())
                 .thirdCorrect(question.isThirdCorrect())
                 .fourthCorrect(question.isFourthCorrect())
+                .build();
+    }
+
+    public static QuestionProfileWithoutCorrectness mapAndReturnQuestionProfileWithoutCorrectness(Question question){
+        return QuestionProfileWithoutCorrectness.builder()
+                .id(question.getId())
+                .question(question.getQuestion())
+                .firstAnswerContent(question.getFirstAnswerContent())
+                .secondAnswerContent(question.getSecondAnswerContent())
+                .thirdAnswerContent(question.getThirdAnswerContent())
+                .fourthAnswerContent(question.getFourthAnswerContent())
                 .build();
     }
 }

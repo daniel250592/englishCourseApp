@@ -62,7 +62,7 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    private User findUserById(long id) {
+    public User findUserById(long id) {
         Optional<User> user = userRepository.findById(id);
 
         return user.orElseThrow(() ->

@@ -36,16 +36,20 @@ public class QuestionService {
     public boolean delete(long id) {
         Optional<Question> questionById = questionRepository.findById(id);
 
-        return questionById.map( data -> {
+        return questionById.map(data -> {
             questionRepository.delete(data);
             return true;
         }).orElse(false);
 
     }
 
-    public QuestionProfileDto getQuestionById(long id) {
+    public QuestionProfileDto getQuestionProfileById(long id) {
         Question question = questionRepository.findById(id).orElseThrow();
         return QuestionMapper.map(question);
+    }
+
+    public Question getQuestionById(long id) {
+        return questionRepository.findById(id).orElseThrow();
     }
 
 }
