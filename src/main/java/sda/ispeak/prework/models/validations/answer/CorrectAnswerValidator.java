@@ -1,4 +1,4 @@
-package sda.ispeak.prework.models.validations.correctAnswerValidator;
+package sda.ispeak.prework.models.validations.answer;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

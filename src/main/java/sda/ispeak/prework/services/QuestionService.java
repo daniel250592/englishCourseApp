@@ -8,6 +8,7 @@ import sda.ispeak.prework.models.mappers.QuestionMapper;
 import sda.ispeak.prework.repositories.QuestionRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,26 +32,20 @@ public class QuestionService {
                 .collect(Collectors.toList());
     }
 
-    public Question getQuestionByIdIfExists(long id) {
-        return questionRepository.findById(id).orElseThrow();
-    }
+    // TODO: dodac obsluge w kontrolerze
+    public boolean delete(long id) {
+        Optional<Question> questionById = questionRepository.findById(id);
 
-    public Question delete(long id) {
-        Question questionById = getQuestionByIdIfExists(id);
-        questionRepository.delete(questionById);
-        return questionById;
-    }
+        return questionById.map( data -> {
+            questionRepository.delete(data);
+            return true;
+        }).orElse(false);
 
-    public Question update(Question question) {
-        Question delete = delete(question.getId());
-        questionRepository.save(delete);
-        return delete;
     }
 
     public QuestionProfileDto getQuestionById(long id) {
         Question question = questionRepository.findById(id).orElseThrow();
-        QuestionProfileDto questionProfileDto = QuestionMapper.map(question);
-        return questionProfileDto;
+        return QuestionMapper.map(question);
     }
 
 }
