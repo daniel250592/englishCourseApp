@@ -6,6 +6,8 @@ import sda.ispeak.prework.models.entities.users.User;
 
 public class UserMapper {
 
+    private UserMapper() {}
+
     public static User map(NewUserDto newUserDto) {
         return User.builder()
                 .email(newUserDto.getEmail())

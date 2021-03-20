@@ -8,9 +8,7 @@ import sda.ispeak.prework.models.entities.topic.Topic;
 
 public class TopicMapper {
 
-    private TopicMapper() {
-
-    }
+    private TopicMapper() {}
 
     public static TopicToListDto map(Topic topic) {
 

@@ -5,6 +5,8 @@ import sda.ispeak.prework.models.entities.userPoints.UserPoints;
 
 public class UserPointsMapper {
 
+    private UserPointsMapper() {}
+
     public static UserPointsProfile map (UserPoints userPoints){
         return UserPointsProfile.builder()
                 .id(userPoints.getId())

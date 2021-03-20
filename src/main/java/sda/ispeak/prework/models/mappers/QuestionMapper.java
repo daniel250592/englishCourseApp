@@ -7,6 +7,9 @@ import sda.ispeak.prework.models.dtos.question.QuestionProfileWithoutCorrectness
 import sda.ispeak.prework.models.entities.questions.Question;
 
 public class QuestionMapper {
+
+    private QuestionMapper() {}
+
     public static Question map(NewQuestionDto newQuestionDto) {
         return Question.builder()
                 .id(newQuestionDto.getId())
