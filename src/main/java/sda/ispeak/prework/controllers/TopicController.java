@@ -36,7 +36,6 @@ public class TopicController {
 
     @GetMapping()
     public List<TopicToListDto> getAllTopics() {
-
         return service.getAllTopics();
     }
 

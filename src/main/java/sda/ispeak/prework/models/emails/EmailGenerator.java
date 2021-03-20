@@ -4,6 +4,8 @@ import sda.ispeak.prework.models.entities.users.User;
 
 public class EmailGenerator {
 
+    private EmailGenerator(){}
+
     public static MyEmail generateEmail(User user) {
         return MyEmail.builder()
                 .recipient(user.getEmail())

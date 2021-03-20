@@ -3,6 +3,7 @@ package sda.ispeak.prework.services;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import sda.ispeak.prework.models.dtos.question.AnswerDto;
+import sda.ispeak.prework.models.dtos.question.QuestionProfileDto;
 import sda.ispeak.prework.models.dtos.question.QuestionProfileWithoutCorrectness;
 import sda.ispeak.prework.models.dtos.userPoints.UserPointsProfile;
 import sda.ispeak.prework.models.entities.questions.Question;
@@ -16,6 +17,7 @@ import sda.ispeak.prework.repositories.UserPointsRepository;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 public class QuizService {
@@ -56,14 +58,14 @@ public class QuizService {
                 }
                 return questionFromGivenQuiz;
             } else return getQuestionFromGivenQuiz(topicId);
-        } catch (NoSuchElementException exception){
+        } catch (NoSuchElementException exception) {
             QuestionProfileWithoutCorrectness questionProfileWithoutCorrectness = new QuestionProfileWithoutCorrectness();
-           questionProfileWithoutCorrectness.setQuizScore(answerDto.getQuizScore());
-           questionProfileWithoutCorrectness.setQuestion(exception.getMessage());
+            questionProfileWithoutCorrectness.setQuizScore(answerDto.getQuizScore());
+            questionProfileWithoutCorrectness.setQuestion(exception.getMessage());
             if (checkAnswerCorrectness(answerDto)) {
                 questionProfileWithoutCorrectness.setQuizScore(questionProfileWithoutCorrectness.getQuizScore() + 1);
             }
-            addPointsToUser(topicId,questionProfileWithoutCorrectness.getQuizScore(),userId);
+            addPointsToUser(topicId, questionProfileWithoutCorrectness.getQuizScore(), userId);
             return questionProfileWithoutCorrectness;
         }
     }
@@ -74,7 +76,7 @@ public class QuizService {
             questionIdManager.addValuesToQueue(questionsIdsFromGivenTopic);
         }
         if (questionIdManager.peekNextId() != null) {
-            return QuestionMapper.mapAndReturnQuestionProfileWithoutCorrectness(questionService.getQuestionById(questionIdManager.pollNextId()));
+            return QuestionMapper.mapAndReturnQuestionProfileWithoutCorrectness(questionService.findQuestionById(questionIdManager.pollNextId()));
         } else {
             throw new NoSuchElementException("Quiz zakończony");
         }
@@ -82,7 +84,7 @@ public class QuizService {
     }
 
     private boolean checkAnswerCorrectness(AnswerDto answerDto) {
-        Question questionById = questionService.getQuestionById(answerDto.getQuestionId());
+        Question questionById = questionService.findQuestionById(answerDto.getQuestionId());
         String correctAnswer = getCorrectAnswer(questionById);
         return answerDto.getChosenAnswer().equals(correctAnswer);
     }
@@ -119,5 +121,14 @@ public class QuizService {
                 .id(id)
                 .build();
         quizRepository.save(quiz);
+    }
+
+    public List<QuestionProfileDto> assignQuestionToQuiz(long questionId, long quizId) {
+        Question question = questionService.findQuestionById(questionId);
+        Quiz quiz = findQuizById(quizId);
+        quiz.getQuestions().add(question);
+        Quiz save = quizRepository.save(quiz);
+        return save.getQuestions().stream().map(QuestionMapper::map).collect(Collectors.toList());
+
     }
 }

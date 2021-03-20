@@ -1,5 +1,6 @@
 package sda.ispeak.prework.services;
 
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import sda.ispeak.prework.models.dtos.question.NewQuestionDto;
 import sda.ispeak.prework.models.dtos.question.QuestionProfileDto;
@@ -15,9 +16,11 @@ import java.util.stream.Collectors;
 public class QuestionService {
 
     private final QuestionRepository questionRepository;
+    private final QuizService quizService;
 
-    public QuestionService(QuestionRepository questionRepository) {
+    public QuestionService(QuestionRepository questionRepository, @Lazy QuizService quizService) {
         this.questionRepository = questionRepository;
+        this.quizService = quizService;
     }
 
     public QuestionProfileDto save(NewQuestionDto newQuestionDto) {
@@ -48,8 +51,29 @@ public class QuestionService {
         return QuestionMapper.map(question);
     }
 
-    public Question getQuestionById(long id) {
+    public Question findQuestionById(long id) {
         return questionRepository.findById(id).orElseThrow();
     }
 
+    public QuestionProfileDto updateQuestion(long questionId, NewQuestionDto newQuestionDto) {
+        Question questionById = findQuestionById(questionId);
+
+        questionById.setQuestion(newQuestionDto.getQuestion());
+        questionById.setFirstAnswerContent(newQuestionDto.getFirstAnswerContent());
+        questionById.setSecondAnswerContent(newQuestionDto.getSecondAnswerContent());
+        questionById.setThirdAnswerContent(newQuestionDto.getThirdAnswerContent());
+        questionById.setFourthAnswerContent(newQuestionDto.getFourthAnswerContent());
+
+        questionById.setFirstCorrect(newQuestionDto.isFirstCorrect());
+        questionById.setSecondCorrect(newQuestionDto.isSecondCorrect());
+        questionById.setThirdCorrect(newQuestionDto.isThirdCorrect());
+        questionById.setFourthCorrect(newQuestionDto.isFourthCorrect());
+
+        return QuestionMapper.map(questionById);
+    }
+
+    public List<QuestionProfileDto> assignQuestionToQuiz(long questionId, long quizId) {
+        return quizService.assignQuestionToQuiz(questionId, quizId);
+
+    }
 }
