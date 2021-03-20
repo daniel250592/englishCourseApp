@@ -1,7 +1,13 @@
 package sda.ispeak.prework.controllers;
 
 
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import sda.ispeak.prework.models.dtos.question.NewQuestionDto;
 import sda.ispeak.prework.models.dtos.question.QuestionProfileDto;
 import sda.ispeak.prework.services.QuestionService;
@@ -30,5 +36,10 @@ public class QuestionController {
 
     }
 
+    @GetMapping( "/getQuestionProfileDto/{id}")
+    @ResponseBody
+    public QuestionProfileDto getQuestionByID(@PathVariable long id) {
+        return questionService.getQuestionById(id);
+    }
 
 }

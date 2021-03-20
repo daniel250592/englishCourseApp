@@ -1,4 +1,4 @@
-package sda.ispeak.prework.models.validations.correctAnswerValidator;
+package sda.ispeak.prework.models.validations.answer;
 
 import sda.ispeak.prework.models.dtos.question.NewQuestionDto;
 
@@ -9,7 +9,11 @@ public class CorrectAnswerValidatorImpl implements ConstraintValidator<CorrectAn
 
     @Override
     public boolean isValid(NewQuestionDto newQuestionDto, ConstraintValidatorContext constraintValidatorContext) {
-        return false;
+
+        int count = newQuestionDto.isFirstCorrect() ? 1 : 0;
+        count += newQuestionDto.isSecondCorrect() ? 1 : 0;
+        count += newQuestionDto.isThirdCorrect() ? 1 : 0;
+        count += newQuestionDto.isFourthCorrect() ? 1 : 0;
+        return count == 1;
     }
-    //TODO - zrobić tak by TRUE gdy DOKŁADNIE jedna odp poprawna
 }
