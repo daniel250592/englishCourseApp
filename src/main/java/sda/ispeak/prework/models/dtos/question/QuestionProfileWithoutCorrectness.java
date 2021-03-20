@@ -16,4 +16,6 @@ public class QuestionProfileWithoutCorrectness {
     private String secondAnswerContent;
     private String thirdAnswerContent;
     private String fourthAnswerContent;
+
+    private int quizScore;
 }

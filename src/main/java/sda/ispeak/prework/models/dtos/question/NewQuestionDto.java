@@ -1,6 +1,7 @@
 package sda.ispeak.prework.models.dtos.question;
 
 import lombok.*;
+import sda.ispeak.prework.models.validations.answer.CorrectAnswerValidator;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -11,6 +12,7 @@ import javax.validation.constraints.Size;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@CorrectAnswerValidator
 public class NewQuestionDto {
 
     @Min(message = "Wpisz id", value = 0L)

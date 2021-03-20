@@ -18,6 +18,8 @@ public class AnswerDto {
 
     @Min(value = 0)
     private long questionId;
+
+    private int quizScore;
 }
 
 

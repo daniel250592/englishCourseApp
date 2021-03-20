@@ -3,7 +3,6 @@ package sda.ispeak.prework.services;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import sda.ispeak.prework.models.dtos.question.AnswerDto;
-import sda.ispeak.prework.models.dtos.question.QuestionProfileDto;
 import sda.ispeak.prework.models.dtos.question.QuestionProfileWithoutCorrectness;
 import sda.ispeak.prework.models.dtos.userPoints.UserPointsProfile;
 import sda.ispeak.prework.models.entities.questions.Question;
@@ -47,27 +46,42 @@ public class QuizService {
         return getQuestionsIdsFromGivenQuiz(topicId);
     }
 
-    public QuestionProfileDto getQuestionFromGivenQuiz(long topicId) {
+    public QuestionProfileWithoutCorrectness getQuestionFromGivenQuizAndCheckCorrectness(long topicId, AnswerDto answerDto, long userId) {
+        try {
+            if (answerDto.getQuestionId() != 0) {
+                QuestionProfileWithoutCorrectness questionFromGivenQuiz = getQuestionFromGivenQuiz(topicId);
+                questionFromGivenQuiz.setQuizScore(answerDto.getQuizScore());
+                if (checkAnswerCorrectness(answerDto)) {
+                    questionFromGivenQuiz.setQuizScore(questionFromGivenQuiz.getQuizScore() + 1);
+                }
+                return questionFromGivenQuiz;
+            } else return getQuestionFromGivenQuiz(topicId);
+        } catch (NoSuchElementException exception){
+            QuestionProfileWithoutCorrectness questionProfileWithoutCorrectness = new QuestionProfileWithoutCorrectness();
+           questionProfileWithoutCorrectness.setQuizScore(answerDto.getQuizScore());
+           questionProfileWithoutCorrectness.setQuestion(exception.getMessage());
+            if (checkAnswerCorrectness(answerDto)) {
+                questionProfileWithoutCorrectness.setQuizScore(questionProfileWithoutCorrectness.getQuizScore() + 1);
+            }
+            addPointsToUser(topicId,questionProfileWithoutCorrectness.getQuizScore(),userId);
+            return questionProfileWithoutCorrectness;
+        }
+    }
+
+    public QuestionProfileWithoutCorrectness getQuestionFromGivenQuiz(long topicId) {
         if (questionIdManager.isEmpty()) {
             List<Long> questionsIdsFromGivenTopic = getQuestionsIdsFromGivenTopic(topicId);
             questionIdManager.addValuesToQueue(questionsIdsFromGivenTopic);
         }
         if (questionIdManager.peekNextId() != null) {
-            return  QuestionMapper.map(questionService.getQuestionById(questionIdManager.pollNextId()));
+            return QuestionMapper.mapAndReturnQuestionProfileWithoutCorrectness(questionService.getQuestionById(questionIdManager.pollNextId()));
         } else {
             throw new NoSuchElementException("Quiz zakończony");
-            //TODO zrobić swój wyjątek
-            //TODO można zrobic endpoint zacznij quiz od nowa
         }
 
     }
 
-
-    public QuestionProfileWithoutCorrectness getQuestionById(long id) {
-        return QuestionMapper.mapAndReturnQuestionProfileWithoutCorrectness(questionService.getQuestionById(id));
-    }
-
-    public boolean checkAnswerCorrectness(AnswerDto answerDto) {
+    private boolean checkAnswerCorrectness(AnswerDto answerDto) {
         Question questionById = questionService.getQuestionById(answerDto.getQuestionId());
         String correctAnswer = getCorrectAnswer(questionById);
         return answerDto.getChosenAnswer().equals(correctAnswer);
@@ -86,7 +100,7 @@ public class QuizService {
         throw new NoSuchElementException();
     }
 
-    public UserPointsProfile addPointsToUser(long quizId, int points, long userId) {
+    private UserPointsProfile addPointsToUser(long quizId, int points, long userId) {
         return UserPointsMapper.map(userPointsRepository.save(UserPoints.builder()
                 .id(userId)
                 .user(userService.findUserById(userId))
