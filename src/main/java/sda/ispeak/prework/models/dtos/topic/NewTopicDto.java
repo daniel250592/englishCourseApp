@@ -22,6 +22,9 @@ public class NewTopicDto {
     @Size(min = 2, max = 100, message = "Temat musi zawierać minimalnie 2 znaki, maksymalnie 50 znaków")
     private String name;
 
+    @NotNull(message = "Wprowadź treść")
+    @NotBlank(message = "Wprowadź treść")
+    @Size(min = 20, message = "Treść musi zawierać minimalnie 20 znaki")
     private String content;
 
     public long getId() {

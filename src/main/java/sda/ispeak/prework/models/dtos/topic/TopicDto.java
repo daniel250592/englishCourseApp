@@ -3,13 +3,13 @@ package sda.ispeak.prework.models.dtos.topic;
 import lombok.Builder;
 
 @Builder
-public class TopicProfile {
+public class TopicDto {
 
     private long id;
     private String name;
     private String content;
 
-    public TopicProfile(long id, String name, String content) {
+    public TopicDto(long id, String name, String content) {
         this.id = id;
         this.name = name;
         this.content = content;
