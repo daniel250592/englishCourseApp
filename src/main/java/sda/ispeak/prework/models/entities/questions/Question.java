@@ -1,8 +1,10 @@
 package sda.ispeak.prework.models.entities.questions;
 
 import lombok.*;
+import sda.ispeak.prework.models.validations.answer.CorrectAnswerValidator;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
@@ -26,7 +28,5 @@ public class Question {
     private boolean secondCorrect = false;
     private boolean thirdCorrect = false;
     private boolean fourthCorrect = false;
-
-
 
 }
