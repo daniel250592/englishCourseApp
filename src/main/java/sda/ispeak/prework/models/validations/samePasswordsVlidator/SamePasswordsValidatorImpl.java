@@ -1,4 +1,4 @@
-package sda.ispeak.prework.models.validations.theSamePasswordsVlidator;
+package sda.ispeak.prework.models.validations.samePasswordsVlidator;
 
 import org.apache.commons.lang3.StringUtils;
 import sda.ispeak.prework.models.dtos.user.NewUserDto;
@@ -6,7 +6,7 @@ import sda.ispeak.prework.models.dtos.user.NewUserDto;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class TheSamePasswordsValidatorImpl implements ConstraintValidator<TheSamePasswordsValidator, NewUserDto> {
+public class SamePasswordsValidatorImpl implements ConstraintValidator<SamePasswordsValidator, NewUserDto> {
 
     @Override
     public boolean isValid(NewUserDto newUserDto, ConstraintValidatorContext constraintValidatorContext) {

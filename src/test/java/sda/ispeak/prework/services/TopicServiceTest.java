@@ -6,7 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import sda.ispeak.prework.models.dtos.topic.TopicToListDto;
-import sda.ispeak.prework.models.topic.Topic;
+import sda.ispeak.prework.models.entities.topic.Topic;
 import sda.ispeak.prework.repositories.TopicRepository;
 
 import java.util.List;

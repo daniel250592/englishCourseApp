@@ -3,7 +3,7 @@ package sda.ispeak.prework.models.mappers;
 import org.junit.jupiter.api.Test;
 import sda.ispeak.prework.models.dtos.user.NewUserDto;
 import sda.ispeak.prework.models.dtos.user.UserProfile;
-import sda.ispeak.prework.models.users.User;
+import sda.ispeak.prework.models.entities.users.User;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -1,12 +1,14 @@
 package sda.ispeak.prework.services;
 
 import org.springframework.stereotype.Service;
-import sda.ispeak.prework.models.dtos.QuestionDto;
+import sda.ispeak.prework.models.dtos.question.NewQuestionDto;
+import sda.ispeak.prework.models.dtos.question.QuestionProfileDto;
+import sda.ispeak.prework.models.entities.questions.Question;
 import sda.ispeak.prework.models.mappers.QuestionMapper;
-import sda.ispeak.prework.models.questions.Question;
 import sda.ispeak.prework.repositories.QuestionRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class QuestionService {
@@ -17,16 +19,16 @@ public class QuestionService {
         this.questionRepository = questionRepository;
     }
 
-    public Question save(QuestionDto questionDto) {
-        return questionRepository.save(QuestionMapper.map(questionDto));
+    public QuestionProfileDto save(NewQuestionDto newQuestionDto) {
+        Question question = QuestionMapper.map(newQuestionDto);
+        Question save = questionRepository.save(question);
+        return QuestionMapper.map(save);
     }
 
-    public List<Question> getAllQuestions() {
-        return questionRepository.findAll();
-    }
-
-    public long saveQuestionAndReturnId(QuestionDto questionDto) {
-        return questionRepository.save(QuestionMapper.map(questionDto)).getId();
+    public List<QuestionProfileDto> getAllQuestions() {
+        return questionRepository.findAll().stream()
+                .map(QuestionMapper::map)
+                .collect(Collectors.toList());
     }
 
     public Question getQuestionById(long id) {
@@ -44,6 +46,4 @@ public class QuestionService {
         questionRepository.save(delete);
         return delete;
     }
-
-
 }

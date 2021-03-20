@@ -1,34 +1,50 @@
-package sda.ispeak.prework.models.forms;
+package sda.ispeak.prework.models.entities.questions;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.ToString;
-import sda.ispeak.prework.models.questions.Question;
-import sda.ispeak.prework.models.validations.theSamePasswordsVlidator.TheSamePasswordsValidator;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 @ToString
-public class FourAnswersForm {
+@Builder
+@AllArgsConstructor
+public class Question {
+
+    @Id
+    private long id;
+
+    private String question;
 
     private String firstAnswerContent;
     private String secondAnswerContent;
     private String thirdAnswerContent;
     private String fourthAnswerContent;
 
-
     private boolean firstCorrect = false;
     private boolean secondCorrect = false;
     private boolean thirdCorrect = false;
     private boolean fourthCorrect = false;
 
-    private Question question;
-
-    public FourAnswersForm() {
-
+    public Question() {
     }
 
-    public Question getQuestion() {
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+
+    public String getQuestion() {
         return question;
     }
 
-    public void setQuestion(Question question) {
+    public void setQuestion(String question) {
         this.question = question;
     }
 
@@ -95,4 +111,5 @@ public class FourAnswersForm {
     public void setFourthCorrect(boolean fourthCorrect) {
         this.fourthCorrect = fourthCorrect;
     }
+
 }

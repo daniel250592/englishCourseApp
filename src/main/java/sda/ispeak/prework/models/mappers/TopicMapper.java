@@ -3,7 +3,7 @@ package sda.ispeak.prework.models.mappers;
 import sda.ispeak.prework.models.dtos.topic.NewTopicDto;
 import sda.ispeak.prework.models.dtos.topic.TopicProfile;
 import sda.ispeak.prework.models.dtos.topic.TopicToListDto;
-import sda.ispeak.prework.models.topic.Topic;
+import sda.ispeak.prework.models.entities.topic.Topic;
 
 
 public class TopicMapper {

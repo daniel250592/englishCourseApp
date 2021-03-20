@@ -1,4 +1,4 @@
-package sda.ispeak.prework.models.validations.theSamePasswordsVlidator;
+package sda.ispeak.prework.models.validations.correctAnswerValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -7,12 +7,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy = TheSamePasswordsValidatorImpl.class)
+@Constraint(validatedBy = CorrectAnswerValidatorImpl.class)
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface TheSamePasswordsValidator {
-
-    String message() default "Hasła różnią się";
+public @interface CorrectAnswerValidator {
+    String message() default "Dokładnie jedna odpowiedź powinna być poprawna";
 
     Class<?>[] groups() default {};
 

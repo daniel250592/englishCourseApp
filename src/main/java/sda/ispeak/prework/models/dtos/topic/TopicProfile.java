@@ -9,6 +9,12 @@ public class TopicProfile {
     private String name;
     private String content;
 
+    public TopicProfile(long id, String name, String content) {
+        this.id = id;
+        this.name = name;
+        this.content = content;
+    }
+
     public long getId() {
         return id;
     }

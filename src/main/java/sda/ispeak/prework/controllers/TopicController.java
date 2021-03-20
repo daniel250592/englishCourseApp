@@ -1,11 +1,14 @@
 package sda.ispeak.prework.controllers;
 
 import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import sda.ispeak.prework.models.dtos.topic.TopicProfile;
 import org.springframework.web.bind.annotation.*;
 import sda.ispeak.prework.models.dtos.topic.NewTopicDto;
-import sda.ispeak.prework.models.dtos.topic.TopicProfile;
 import sda.ispeak.prework.models.dtos.topic.TopicToListDto;
-import sda.ispeak.prework.models.topic.Topic;
+import sda.ispeak.prework.models.entities.topic.Topic;
 import sda.ispeak.prework.services.TopicService;
 
 import java.util.List;

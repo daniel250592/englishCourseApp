@@ -2,10 +2,11 @@ package sda.ispeak.prework.controllers;
 
 
 import org.springframework.web.bind.annotation.*;
-import sda.ispeak.prework.models.dtos.QuestionDto;
-import sda.ispeak.prework.models.questions.Question;
+import sda.ispeak.prework.models.dtos.question.NewQuestionDto;
+import sda.ispeak.prework.models.dtos.question.QuestionProfileDto;
 import sda.ispeak.prework.services.QuestionService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -19,13 +20,13 @@ public class QuestionController {
     }
 
     @PostMapping("/add-new-question")
-    public Question addQuestion(@RequestBody QuestionDto questionDto) {
-        return questionService.save(questionDto);
+    public QuestionProfileDto addQuestion(@RequestBody @Valid NewQuestionDto newQuestionDto) {
+        return questionService.save(newQuestionDto);
     }
 
     @GetMapping("/get-all-questions")
-    public List<Question> getAllQuestions() {
-       return questionService.getAllQuestions();
+    public List<QuestionProfileDto> getAllQuestions() {
+        return questionService.getAllQuestions();
 
     }
 

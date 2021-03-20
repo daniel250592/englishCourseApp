@@ -1,12 +1,12 @@
 package sda.ispeak.prework.services;
 
 import org.springframework.stereotype.Service;
-import sda.ispeak.prework.models.dtos.topic.NewTopicDto;
 import sda.ispeak.prework.models.dtos.topic.TopicProfile;
 import sda.ispeak.prework.models.dtos.topic.TopicToListDto;
+import sda.ispeak.prework.models.dtos.topic.NewTopicDto;
 import sda.ispeak.prework.models.exceptions.NoSuchTopicExeption;
 import sda.ispeak.prework.models.mappers.TopicMapper;
-import sda.ispeak.prework.models.topic.Topic;
+import sda.ispeak.prework.models.entities.topic.Topic;
 import sda.ispeak.prework.repositories.TopicRepository;
 
 import java.util.Comparator;

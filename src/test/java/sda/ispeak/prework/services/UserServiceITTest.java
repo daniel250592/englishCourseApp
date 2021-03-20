@@ -8,7 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import sda.ispeak.prework.models.dtos.user.NewUserDto;
 import sda.ispeak.prework.models.dtos.user.UserProfile;
-import sda.ispeak.prework.models.exceptions.UserExistException;
+import sda.ispeak.prework.models.exceptions.userExceptions.UserExistException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

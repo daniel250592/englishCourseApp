@@ -9,11 +9,11 @@ import sda.ispeak.prework.models.dtos.user.NewUserDto;
 import sda.ispeak.prework.models.dtos.user.UserProfile;
 import sda.ispeak.prework.models.emails.EmailGenerator;
 import sda.ispeak.prework.models.emails.EmailSender;
-import sda.ispeak.prework.models.exceptions.NoSuchUserException;
-import sda.ispeak.prework.models.exceptions.UserExistException;
+import sda.ispeak.prework.models.entities.users.User;
+import sda.ispeak.prework.models.entities.users.UserDetailsAdapter;
+import sda.ispeak.prework.models.exceptions.userExceptions.NoSuchUserException;
+import sda.ispeak.prework.models.exceptions.userExceptions.UserExistException;
 import sda.ispeak.prework.models.mappers.UserMapper;
-import sda.ispeak.prework.models.users.User;
-import sda.ispeak.prework.models.users.UserDetailsAdapter;
 import sda.ispeak.prework.repositories.UserRepository;
 
 import java.util.Optional;
@@ -33,7 +33,6 @@ public class UserService implements UserDetailsService {
         this.userRepository = userRepository;
         this.emailSender = emailSender;
     }
-
 
     public UserProfile save(NewUserDto newUserDto) {
         User user = UserMapper.map(newUserDto);
