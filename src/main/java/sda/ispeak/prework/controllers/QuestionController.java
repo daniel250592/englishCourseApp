@@ -37,14 +37,9 @@ public class QuestionController {
     }
 
     @GetMapping("question/{id}")
-    public Question getQuestionById(@PathVariable long id) {
-        return questionService.getQuestionById(id);
+    public QuestionProfileDto getQuestionById(@PathVariable long id) {
+        return questionService.getQuestionProfileById(id);
     }
 
-    @GetMapping( "/getQuestionProfileDto/{id}")
-    @ResponseBody
-    public QuestionProfileDto getQuestionByID(@PathVariable long id) {
-        return questionService.getQuestionById(id);
-    }
 
 }

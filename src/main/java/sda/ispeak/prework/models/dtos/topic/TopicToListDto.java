@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TopicProfile {
+public class TopicToListDto {
 
     private long id;
     private String name;
