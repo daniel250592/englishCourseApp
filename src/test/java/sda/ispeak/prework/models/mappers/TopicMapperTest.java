@@ -41,7 +41,7 @@ public class TopicMapperTest {
     }
 
     @Test
-    void shouldMapTopicProfileToTopic() {
+    void shouldMapTopicDtoToTopic() {
 
         TopicDto topicDto = TopicDto.builder()
                 .id(3L)
