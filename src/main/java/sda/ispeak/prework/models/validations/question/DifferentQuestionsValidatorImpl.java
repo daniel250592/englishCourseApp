@@ -9,8 +9,7 @@ public class DifferentQuestionsValidatorImpl implements ConstraintValidator<Diff
 
     @Override
     public boolean isValid(NewQuestionDto newQuestionDto, ConstraintValidatorContext constraintValidatorContext) {
-        boolean isValid = false;
-        if((!(newQuestionDto.getFirstAnswerContent()
+        return (!(newQuestionDto.getFirstAnswerContent()
                 .equals(newQuestionDto.getSecondAnswerContent())))
                 || (!(newQuestionDto.getFirstAnswerContent()
                 .equals(newQuestionDto.getThirdAnswerContent())))
@@ -21,11 +20,7 @@ public class DifferentQuestionsValidatorImpl implements ConstraintValidator<Diff
                 || (!(newQuestionDto.getSecondAnswerContent()
                 .equals(newQuestionDto.getFourthAnswerContent())))
                 || (!(newQuestionDto.getThirdAnswerContent()
-                .equals(newQuestionDto.getFourthAnswerContent())))) {
-
-            return isValid = true;
-        }
-        return isValid;
+                .equals(newQuestionDto.getFourthAnswerContent())));
     }
 
 }

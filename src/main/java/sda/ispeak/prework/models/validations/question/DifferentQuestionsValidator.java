@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface DifferentQuestionsValidator {
 
-    String message() default "Istnieje już takie pytanie w quizie";
+    String message() default "Treść pytania musi się różnić od innych";
 
     Class<?>[] groups() default {};
 
