@@ -26,7 +26,7 @@ public class QuestionController {
         this.questionService = questionService;
     }
 
-    @PostMapping
+    @PostMapping("add")
     public QuestionProfileDto addQuestion(@RequestBody @Valid NewQuestionDto newQuestionDto) {
         return questionService.save(newQuestionDto);
     }

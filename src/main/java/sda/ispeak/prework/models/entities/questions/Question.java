@@ -15,6 +15,7 @@ import javax.persistence.Id;
 public class Question {
 
     @Id
+    @GeneratedValue
     private long id;
 
     private String question;

@@ -12,7 +12,6 @@ public class QuestionMapper {
 
     public static Question map(NewQuestionDto newQuestionDto) {
         return Question.builder()
-                .id(newQuestionDto.getId())
                 .question(newQuestionDto.getQuestion())
                 .firstAnswerContent(newQuestionDto.getFirstAnswerContent())
                 .secondAnswerContent(newQuestionDto.getSecondAnswerContent())

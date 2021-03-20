@@ -18,7 +18,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/topics")
+@RequestMapping("/api/topics")
 public class TopicController {
 
     private final TopicService service;

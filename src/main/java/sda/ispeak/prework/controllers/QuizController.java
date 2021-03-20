@@ -14,7 +14,7 @@ import sda.ispeak.prework.services.QuizService;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/quiz")
+@RequestMapping("/api/quiz")
 public class QuizController {
 
     private final QuizService quizService;

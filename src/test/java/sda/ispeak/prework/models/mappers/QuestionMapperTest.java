@@ -13,7 +13,6 @@ public class QuestionMapperTest {
     void shouldMapToNewQuestionDto() {
 
         NewQuestionDto newQuestionDto = NewQuestionDto.builder()
-                .id(1L)
                 .question("Example question")
                 .firstAnswerContent("A")
                 .secondAnswerContent("B")
@@ -27,7 +26,6 @@ public class QuestionMapperTest {
 
         Question question = QuestionMapper.map(newQuestionDto);
 
-        assertThat(newQuestionDto.getId()).isEqualTo(question.getId());
         assertThat(newQuestionDto.getQuestion()).isEqualTo(question.getQuestion());
         assertThat(newQuestionDto.getFirstAnswerContent()).isEqualTo(question.getFirstAnswerContent());
         assertThat(newQuestionDto.getSecondAnswerContent()).isEqualTo(question.getSecondAnswerContent());
