@@ -1,6 +1,7 @@
 package sda.ispeak.prework.models.dtos.question;
 
 import lombok.*;
+import sda.ispeak.prework.models.validations.question.DifferentQuestionsValidator;
 import sda.ispeak.prework.models.validations.answer.CorrectAnswerValidator;
 
 import javax.validation.constraints.Min;
@@ -12,6 +13,7 @@ import javax.validation.constraints.Size;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@DifferentQuestionsValidator
 @CorrectAnswerValidator
 public class NewQuestionDto {
 
