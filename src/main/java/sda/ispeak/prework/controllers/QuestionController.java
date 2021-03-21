@@ -36,10 +36,10 @@ public class QuestionController {
         return questionService.assignQuestionToQuiz(questionId,quizId);
     }
 
-    @PutMapping("/{questionId}")
-    public QuestionProfileDto updateQuestion(@PathVariable long questionId, @RequestBody @Valid NewQuestionDto newQuestionDto) {
-        return questionService.updateQuestion(questionId,newQuestionDto);
-    }
+//    @PutMapping("/{questionId}")
+//    public QuestionProfileDto updateQuestion(@PathVariable long questionId, @RequestBody @Valid NewQuestionDto newQuestionDto) {
+//        return questionService.updateQuestion(questionId,newQuestionDto);
+//    }
 
     @DeleteMapping("/{questionId}")
     public boolean deleteQuestion(@PathVariable long questionId) {
