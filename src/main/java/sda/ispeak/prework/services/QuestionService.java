@@ -2,6 +2,7 @@ package sda.ispeak.prework.services;
 
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import sda.ispeak.prework.models.dtos.question.NewQuestionDto;
 import sda.ispeak.prework.models.dtos.question.QuestionProfileDto;
 import sda.ispeak.prework.models.entities.questions.Question;
@@ -35,12 +36,13 @@ public class QuestionService {
                 .collect(Collectors.toList());
     }
 
-    // TODO: dodac obsluge w kontrolerze
+    @Transactional
     public boolean delete(long id) {
         Optional<Question> questionById = questionRepository.findById(id);
 
         return questionById.map(data -> {
-            questionRepository.delete(data);
+            questionRepository.deleteQuizQuestionById(id);
+            questionRepository.deleteQuestionByID(id);
             return true;
         }).orElse(false);
 
