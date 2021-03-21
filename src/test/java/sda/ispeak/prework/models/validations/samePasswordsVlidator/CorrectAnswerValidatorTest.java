@@ -20,7 +20,6 @@ public class CorrectAnswerValidatorTest {
     void shouldAssertTrue() {
 
         NewQuestionDto newQuestionDto = NewQuestionDto.builder()
-                .id(1L)
                 .question("Example question")
                 .firstAnswerContent("A")
                 .secondAnswerContent("B")
@@ -41,7 +40,6 @@ public class CorrectAnswerValidatorTest {
     void shouldAssertFalse() {
 
         NewQuestionDto newQuestionDto = NewQuestionDto.builder()
-                .id(1L)
                 .question("Example question")
                 .firstAnswerContent("A")
                 .secondAnswerContent("B")
