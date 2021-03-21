@@ -19,6 +19,7 @@ public class TopicService {
 
     private final TopicRepository topicRepository;
     private final QuizService quizService;
+
     public TopicService(TopicRepository topicRepository, @Lazy QuizService quizService) {
         this.topicRepository = topicRepository;
         this.quizService = quizService;

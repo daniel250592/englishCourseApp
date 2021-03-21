@@ -20,7 +20,6 @@ public class DifferentQuestionValidatorTest {
     @Test
     void shouldAssertTrue() {
         NewQuestionDto newQuestionDto = NewQuestionDto.builder()
-                .id(1L)
                 .question("Example question")
                 .firstAnswerContent("A")
                 .secondAnswerContent("B")
@@ -40,7 +39,6 @@ public class DifferentQuestionValidatorTest {
     @Test
     void shouldAssertFalse() {
         NewQuestionDto newQuestionDto = NewQuestionDto.builder()
-                .id(2L)
                 .question("Example question")
                 .firstAnswerContent("A")
                 .secondAnswerContent("C")
@@ -56,5 +54,4 @@ public class DifferentQuestionValidatorTest {
 
         assertThat(valid).isFalse();
     }
-
 }

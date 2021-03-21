@@ -17,9 +17,6 @@ import javax.validation.constraints.Size;
 @CorrectAnswerValidator
 public class NewQuestionDto {
 
-    @Min(message = "Wpisz id", value = 0L)
-    private long id;
-
     @NotBlank(message = "Wpisz pytanie")
     @NotNull(message = "Wpisz pytanie")
     @Size(min = 10, max = 200, message = "Twoje pytanie nie spełnia standardów")

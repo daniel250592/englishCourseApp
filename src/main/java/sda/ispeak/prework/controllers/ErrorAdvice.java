@@ -42,6 +42,4 @@ public class ErrorAdvice {
         log.error("exception message {}", exception.getMessage());
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
-
 }
