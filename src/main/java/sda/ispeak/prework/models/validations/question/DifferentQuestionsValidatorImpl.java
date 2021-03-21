@@ -4,23 +4,21 @@ import sda.ispeak.prework.models.dtos.question.NewQuestionDto;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.util.HashSet;
+import java.util.Set;
 
 public class DifferentQuestionsValidatorImpl implements ConstraintValidator<DifferentQuestionsValidator, NewQuestionDto> {
 
     @Override
     public boolean isValid(NewQuestionDto newQuestionDto, ConstraintValidatorContext constraintValidatorContext) {
-        return (!(newQuestionDto.getFirstAnswerContent()
-                .equals(newQuestionDto.getSecondAnswerContent())))
-                || (!(newQuestionDto.getFirstAnswerContent()
-                .equals(newQuestionDto.getThirdAnswerContent())))
-                || (!(newQuestionDto.getFirstAnswerContent()
-                .equals(newQuestionDto.getFourthAnswerContent())))
-                || (!(newQuestionDto.getSecondAnswerContent()
-                .equals(newQuestionDto.getThirdAnswerContent())))
-                || (!(newQuestionDto.getSecondAnswerContent()
-                .equals(newQuestionDto.getFourthAnswerContent())))
-                || (!(newQuestionDto.getThirdAnswerContent()
-                .equals(newQuestionDto.getFourthAnswerContent())));
+        Set<String> answers = new HashSet<>();
+                answers.add(newQuestionDto.getFirstAnswerContent());
+                answers.add(newQuestionDto.getSecondAnswerContent());
+                answers.add(newQuestionDto.getThirdAnswerContent());
+                answers.add(newQuestionDto.getFourthAnswerContent());
+
+
+        return answers.size() == 4;
     }
 
 }

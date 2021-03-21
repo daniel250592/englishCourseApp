@@ -24,14 +24,11 @@ public class TopicService {
         this.topicRepository = topicRepository;
         this.quizService = quizService;
     }
-
-
     public List<TopicToListDto> getAllTopics() {
         return topicRepository.findAll().stream()
                 .sorted(Comparator.comparing(Topic::getId)).map(TopicMapper::map)
                 .collect(Collectors.toList());
     }
-
     public String getContentFromTopic(long id) {
         return findById(id).getContent();
     }
@@ -42,7 +39,6 @@ public class TopicService {
         quizService.createNewQuizToTopic(topic.getId());
         return TopicMapper.mapToDto(topic);
     }
-
     public TopicDto updateTopic(long id, NewTopicDto topicDto) {
         Topic topic = findById(id);
         topic.setName(topicDto.getName());
@@ -50,9 +46,7 @@ public class TopicService {
         topicRepository.save(topic);
         return TopicMapper.mapToDto(topic);
     }
-
     public Topic findById(long id) {
         return topicRepository.findById(id).orElseThrow(() -> new NoSuchTopicExeption("Brak Tematu o podanym ID"));
     }
-
 }

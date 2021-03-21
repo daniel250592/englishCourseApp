@@ -5,32 +5,25 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.transaction.annotation.Transactional;
 import sda.ispeak.prework.models.dtos.topic.NewTopicDto;
 import sda.ispeak.prework.models.dtos.topic.TopicDto;
 import sda.ispeak.prework.models.dtos.topic.TopicToListDto;
 import sda.ispeak.prework.models.entities.topic.Topic;
 import sda.ispeak.prework.repositories.TopicRepository;
-
 import java.util.List;
 import java.util.Optional;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class TopicServiceTest{
-
     @InjectMocks
     private TopicService topicService;
-
     @Mock
     private TopicRepository topicRepository;
-
     @Mock
     private QuizService quizService;
-
     @Test
     void shouldFetchTopicsAndCheckOrder() {
         when(topicRepository.findAll())
@@ -67,10 +60,10 @@ class TopicServiceTest{
         topic.setName("new name");
         topic.setContent("new content");
         topicRepository.save(topic);
+        
         assertThat(topic.getName()).isEqualTo("new name");
         assertThat(topic.getContent()).isEqualTo("new content");
     }
-
     @Test
     void shouldSaveTopic() {
         NewTopicDto newTopicDto = NewTopicDto.builder()
@@ -78,14 +71,12 @@ class TopicServiceTest{
                 .name("topic name")
                 .content("topic content")
                 .build();
-
         when(topicRepository.save(any()))
                 .thenReturn(Topic.builder()
-                .id(1L)
-                .name("topic name")
-                .content("topic content")
-                .build());
-
+                        .id(1L)
+                        .name("topic name")
+                        .content("topic content")
+                        .build());
         TopicDto topicDto = topicService.save(newTopicDto);
         assertThat(topicDto.getName()).isEqualTo("topic name");
         assertThat(topicDto.getContent()).isEqualTo("topic content");
