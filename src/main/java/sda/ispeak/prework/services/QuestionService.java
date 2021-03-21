@@ -50,6 +50,7 @@ public class QuestionService {
 
     public QuestionProfileDto getQuestionProfileById(long id) {
         Question question = questionRepository.findById(id).orElseThrow();
+        //TODO swój wyjątek
         return QuestionMapper.map(question);
     }
 
@@ -57,22 +58,16 @@ public class QuestionService {
         return questionRepository.findById(id).orElseThrow();
     }
 
-    public QuestionProfileDto updateQuestion(long questionId, NewQuestionDto newQuestionDto) {
-        Question questionById = findQuestionById(questionId);
-
-        questionById.setQuestion(newQuestionDto.getQuestion());
-        questionById.setFirstAnswerContent(newQuestionDto.getFirstAnswerContent());
-        questionById.setSecondAnswerContent(newQuestionDto.getSecondAnswerContent());
-        questionById.setThirdAnswerContent(newQuestionDto.getThirdAnswerContent());
-        questionById.setFourthAnswerContent(newQuestionDto.getFourthAnswerContent());
-
-        questionById.setFirstCorrect(newQuestionDto.isFirstCorrect());
-        questionById.setSecondCorrect(newQuestionDto.isSecondCorrect());
-        questionById.setThirdCorrect(newQuestionDto.isThirdCorrect());
-        questionById.setFourthCorrect(newQuestionDto.isFourthCorrect());
-
-        return QuestionMapper.map(questionById);
-    }
+//    public QuestionProfileDto updateQuestion(long questionId, NewQuestionDto newQuestionDto) {
+//
+//
+//       Question questionById = QuestionMapper.map(newQuestionDto);
+    //tu ustawic dovbre id
+//
+//        questionRepository.save(questionById);
+//
+//        return QuestionMapper.map(questionById);
+//    }
 
     public List<QuestionProfileDto> assignQuestionToQuiz(long questionId, long quizId) {
         return quizService.assignQuestionToQuiz(questionId, quizId);

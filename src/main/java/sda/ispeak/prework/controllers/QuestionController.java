@@ -26,12 +26,12 @@ public class QuestionController {
         this.questionService = questionService;
     }
 
-    @PostMapping("add")
+    @PostMapping()
     public QuestionProfileDto addQuestion(@RequestBody @Valid NewQuestionDto newQuestionDto) {
         return questionService.save(newQuestionDto);
     }
 
-    @PostMapping("add/{questionId}/question-to-quiz/{quizId}")
+    @PostMapping("/{questionId}/question-to-quiz/{quizId}")
     public List<QuestionProfileDto> assignQuestionToQuiz(@PathVariable long questionId, @PathVariable long quizId){
         return questionService.assignQuestionToQuiz(questionId,quizId);
     }
