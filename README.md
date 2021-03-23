@@ -9,9 +9,6 @@ App for English language learners
 * JUnit/AssertJ
 * Maven
 * GitHub
-* Angular 8
-
-repozytorium front end: https://github.com/daniel250592/englishCourseAppAngular
 
 ## Wymagania
 ### Ogólna charakterystyka
@@ -22,15 +19,15 @@ Materiał jest zorganizowany w:
 
 Za przygotowanie materiałów odpowiada użytkownik z uprawnieniami ADMIN.
 Zarejestrowany użytkownik bez tych uprawnień ma dostęp do wyżej wymienionych materiów. 
-Jedyną akcją zmieniającą stan jest uruchomienie wybranego quizu. System pamięta jego odpowiedzi i prezentuje wynik procentowy na koniec.
+Jedyną akcją zmieniającą stan jest uruchomienie wybranego quizu. System pamięta jego odpowiedzi i prezentuje wynik punktowy na koniec.
 
 Początkowe wypełnienie to lorem ipsum.
 Po developmencie minimum viable product'u  lektor języka angielskiego wraz z programistą doda kontent do aplikacji.
 
 ### Struktura aplikacji
 
-Aplikacja powinna być tak zbudowana, aby treść lekcji była zapisana w kodzie aplikacji ale mogła być modyfikowana.
-Aplikacja składa się z dwóch modułów funkcjonalnych. 
+Aplikacja powinna być tak zbudowana, aby treść lekcji była zapisana bazie danych ale mogła być modyfikowana.
+Aplikacja składa się z dwóch modułów funkcjonalnych.
 
 Pierwszy jest to panel administratora o scieżce /admin dostępny po zalogowaniu się użytkownika z uprawnieniami ADMIN.
 Moduł administratora pozawalający na operacje CRUD na pytaniach wraz z odpowiedziami.
@@ -49,8 +46,8 @@ Niniejszy realizuje logikę w postaci obsługi zapytań RestFULL. Dane zapisane 
 ### Szczegółowe wymagania
 #### Role w systemi
 W aktualnej wersji systemu istnieją dwie role:\
-USER \
-ADMIN\
+USER 
+ADMIN
 #### Rejestracja użytkowników
 Rejestracja użytkownika odbywa się po stronie UI w formularzu.
 Formularz rejestracji zawierający: \
@@ -88,14 +85,13 @@ Endpoint ma być dostępny jedynie dla zarejestrowanych użytkowników.
 Zarejestrowany użytkownik po wybraniu tematu może aktywować quiz dostępny dla tego tematu.
 Po aktywowaniu quizu system pokazuje zawsze pierwsze pytanie quizu, nawet jeżeli wcześniej quiz był już wykonany.
 Użytkownik musi zaznaczyć jedną z odpowiedzi zanim przejdzie do kolejnego pytania. Po zaznaczeniu odpowiedzi aktywuje akcję dalej.
-Istnieje kilka endpointów w systemie:
-- pierwszy zwraca listę z ID pytań należących do danego tematu, Front end przetrzymuję lisę i wykonuję zapytanie na endpoint po konkretne pytanie.
-- Następnie istnieje endpoint który przyjmie wybraną odpowiedz oraz ID pytania i zwróci czy wybrana odpowiedz jest poprawna 
-- Front End liczy zdobyte punkty i po skonczonym Quizie 
+Istnieje jeden endpoint odpowiedzialny za obsługę quizu:
+- pierwsze wywołanie zwraca pierwsze pytanie w quizie, front end wysyła JSONA z wybraną odpowiedzia i ilością juz zdobytych punktów 
+- Po przesłaniu wszystkich pytań i zliczeniu odpowiedzi zostaję zapisany rekodr w bazie który przy ponownym zakonczeniu quizu zostanie nadpisany 
   przesyła wynik na przygotowany endpoint zapisujący na bazie danych wynik, wynik poprzedniego jest nadpisywany
 
-Za wywołanie odpowiednich endpointów odpowiada UI.
-Endpointy mają być dostępne jedynie dla zarejestrowanych użytkowników.
+Za przesłanie odpowiednich JSON'ów odpowiada UI.
+Endpoint mają być dostępne jedynie dla zarejestrowanych użytkowników.
   
 #### Dodanie nowego pytania i odpowiedzi
 Użytkownik zarejestrowany jako ADMIN ma dostęp do ednpointu za pomocą którego może utworzyć pytanie z przypisanymi odpowiedziami
@@ -123,7 +119,7 @@ umożliwiać pobieranie danego pytania wraz z odpowiedziami
 i dodatkowo umożliwiać filtrowanie zwracanych pytań po temacie.
 
 Aplikacja wyświetlająca wydarzenia pobrane z API
-Należy zbudować drugą aplikację (z wykorzystaniem Spring + Angular), która skonsumuje API i wygeneruje widok lekcji oraz quizów.
+Należy zbudować drugą aplikację (z wykorzystaniem Spring + Front end), która skonsumuje API i wygeneruje widok lekcji oraz quizów.
 
 ## Jak zainicjować program
 Przed pierwszym uruchomieniem program musisz w zewnętrzym kliencie bazy danych uruchomić skrypt: resources/db/init.sql.
