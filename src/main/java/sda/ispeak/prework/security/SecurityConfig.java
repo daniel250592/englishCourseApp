@@ -21,9 +21,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                //       .antMatchers("/admin/**").hasRole("ADMIN")
-                //       .antMatchers("/api/**").hasRole("USER")
-                //      .antMatchers("/user/**").permitAll()
+                  //     .antMatchers("/admin/**").hasRole("ADMIN")
+                  //     .antMatchers("/api/**").hasRole("USER") //tutaj nie może sięadmin dostac trzeba to poprawic hasRoles
+                  //    .antMatchers("/user/**").permitAll()
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
@@ -34,13 +34,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("admin")
-                .password("$2y$12$y9lNMOBgjqyY4ZNwllhXa..Ze3k1qIiuQZBHuNOCzLr/TrHjOVo.6")   // haslo to 123
-                .roles("ADMIN");
-    }
 
     @Override
     protected UserDetailsService userDetailsService() {

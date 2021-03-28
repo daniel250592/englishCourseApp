@@ -16,4 +16,5 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
     @Modifying
     @Query(nativeQuery = true, value = "DELETE FROM QUIZ_QUESTIONS WHERE QUESTIONS_ID = :id")
     int deleteQuizQuestionById(@Param("id") long id);
+
 }

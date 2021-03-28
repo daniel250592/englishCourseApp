@@ -32,6 +32,9 @@ public class Quiz {
     @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<Question> questions;
 
+    @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<User> users;
+
 
     //TODO nie wiem dlaczego przy takim ustawieniu nie kasuje relacyjnych rekordow
 
